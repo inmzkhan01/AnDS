@@ -2,7 +2,31 @@ package arrays;
 
 import java.util.Arrays;
 
+// https://leetcode.com/problems/increasing-triplet-subsequence/
 public class Sorted_Subsequence_of_Size_3 {
+
+    static class Increasing_Triplet_Subsequence {
+
+        static boolean increasingTriplet(int[] nums) {
+            int lisLength = 0;
+            int[] lis = new int[nums.length];
+
+            for (int num : nums) {
+                int index = Arrays.binarySearch(lis, 0, lisLength, num);
+
+                if (index < 0) {
+                    index = -(index + 1);
+                }
+
+                lis[index] = num;
+
+                if (index == lisLength) {
+                    lisLength += 1;
+                }
+            }
+            return lisLength >= 3;
+        }
+    }
 
     static void sortedSubsequence(int[] arr) {
         int n = arr.length;
@@ -33,9 +57,9 @@ public class Sorted_Subsequence_of_Size_3 {
             }
         }
 
-        for(int i=0; i<n; i++) {
-            if(smaller[i] !=-1 && greater[i]!=-1) {
-                System.out.println(arr[smaller[i]] +", "+arr[i]+", "+arr[greater[i]]);
+        for (int i = 0; i < n; i++) {
+            if (smaller[i] != -1 && greater[i] != -1) {
+                System.out.println(arr[smaller[i]] + ", " + arr[i] + ", " + arr[greater[i]]);
             }
         }
     }
@@ -44,7 +68,13 @@ public class Sorted_Subsequence_of_Size_3 {
         int[] arr = {12, 11, 10, 5, 6, 2, 7};
         sortedSubsequence(arr);
 
-        int[] arr1 = {1,2,3,4};
+        int[] arr1 = {1, 2, 3, 4};
         sortedSubsequence(arr1);
+
+        System.out.println(Increasing_Triplet_Subsequence.increasingTriplet(new int[]{12, 11, 10, 5, 6, 2, 7}));
+        System.out.println(Increasing_Triplet_Subsequence.increasingTriplet(new int[]{1, 2, 3, 4}));
+
     }
+
+
 }

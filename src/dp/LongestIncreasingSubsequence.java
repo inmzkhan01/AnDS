@@ -1,7 +1,7 @@
 package dp;
 
 
-//https://leetcode.com/problems/russian-doll-envelopes/discuss/82763/Java-NLogN-Solution-with-Explanation
+// https://leetcode.com/problems/longest-increasing-subsequence
 public class LongestIncreasingSubsequence {
 
     static int LIS(int[] arr) {
