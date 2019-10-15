@@ -1,8 +1,8 @@
-package arrays;
+package arrays.sorting;
 
 import java.util.Arrays;
 
-public class RadixSort {
+public class Radix_Sort {
 
     public static void main(String[] args) {
         sortBinary();

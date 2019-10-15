@@ -3,7 +3,7 @@ package arrays;
 import java.util.Arrays;
 
 //https://www.geeksforgeeks.org/find-next-greater-number-set-digits/
-public class Find_next_greater_number_set_digits {
+public class Next_Greater_Number_Set_Digits {
 
     public static void main(String[] args) {
 

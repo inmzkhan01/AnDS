@@ -1,10 +1,10 @@
-package arrays;
+package arrays.slidingwindow;
 
 import java.util.Arrays;
 import java.util.Stack;
 
 // https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k-using-stack-in-on-time
-public class SlidingWindow_Maximum_of_all_subarrays_of_size_k {
+public class Maximum_Of_All_Subarrays_Of_Size_K_Stack {
 
     public static int[] maximumOfSubarrays(int[] a, int k) {
 

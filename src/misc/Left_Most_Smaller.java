@@ -2,7 +2,7 @@ package misc;
 
 import java.util.Arrays;
 
-public class LeftMostSmaller {
+public class Left_Most_Smaller {
 
     static int[] leftMostSmaller(int[] nums, int m) {
 

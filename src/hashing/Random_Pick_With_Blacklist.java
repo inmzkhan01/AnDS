@@ -3,13 +3,13 @@ package hashing;
 import java.util.*;
 
 //https://leetcode.com/problems/random-pick-with-blacklist
-public class Random_Pick_with_Blacklist {
+public class Random_Pick_With_Blacklist {
 
     Map<Integer, Integer> blackListMap;
     Random random;
     int randomBound;
 
-    public Random_Pick_with_Blacklist(int N, int[] blacklist) {
+    public Random_Pick_With_Blacklist(int N, int[] blacklist) {
         int whitelistLen = N - blacklist.length;
 
         Set<Integer> numbersAfterWhitelistLen = new HashSet<>();
@@ -39,7 +39,7 @@ public class Random_Pick_with_Blacklist {
     }
 
     public static void main(String[] args) {
-        Random_Pick_with_Blacklist randomPick = new Random_Pick_with_Blacklist(1, new int[0]);
+        Random_Pick_With_Blacklist randomPick = new Random_Pick_With_Blacklist(1, new int[0]);
         System.out.println(randomPick.pick());
         System.out.println(randomPick.pick());
     }

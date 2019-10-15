@@ -3,13 +3,13 @@ package arrays;
 import java.util.Arrays;
 import java.util.Random;
 
-public class RandomQueue {
+public class Random_Queue {
 
     private int[] elements;
     int size;
     int index;
 
-    public RandomQueue() {
+    public Random_Queue() {
         elements = new int[10];
         size = 0;
         index = 0;
@@ -43,7 +43,7 @@ public class RandomQueue {
     }
 
     public static void main(String[] args) {
-        RandomQueue randomQueue = new RandomQueue();
+        Random_Queue randomQueue = new Random_Queue();
         randomQueue.enque(13);
         randomQueue.enque(16);
         randomQueue.enque(21);

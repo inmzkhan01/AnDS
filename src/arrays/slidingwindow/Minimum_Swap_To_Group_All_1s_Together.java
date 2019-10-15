@@ -1,6 +1,6 @@
-package arrays;
+package arrays.slidingwindow;
 
-public class SlidingWindow_Minimum_swap_to_group_all_1s_together {
+public class Minimum_Swap_To_Group_All_1s_Together {
 
     public int minSwap(int[] arr) {
         int n = arr.length;

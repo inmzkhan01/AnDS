@@ -1,6 +1,6 @@
 package binarysearch;
 
-public class BinarySearch {
+public class Binary_Search {
 
     static class Recursive {
 

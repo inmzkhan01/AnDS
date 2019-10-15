@@ -1,10 +1,10 @@
-package arrays;
+package arrays.slidingwindow;
 
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class SlidingWindow_Maximum_of_all_subarrays_of_size_k_using_Dequeue {
+public class Maximum_Of_All_Subarrays_Of_Size_K_Dequeue {
 
     public static int[] maximumOfSubarrays(int[] arr, int k) {
         int n = arr.length;

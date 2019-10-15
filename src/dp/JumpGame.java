@@ -159,6 +159,6 @@ public class JumpGame {
         int[] nums = {2, 4, 2, 1, 0, 2, 0};
         System.out.println("\narr5 RecursiveMemorization: " + RecursiveMemorization.jump(nums));
         System.out.println("nums BottomUpDP: " + BottomUpDP.jump(nums));
-        System.out.println("nums Greedy: " + Greedy.canJump(nums));
+        System.out.println("nums greedy: " + Greedy.canJump(nums));
     }
 }

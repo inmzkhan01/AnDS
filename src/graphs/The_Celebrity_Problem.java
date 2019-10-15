@@ -1,6 +1,6 @@
 package graphs;
 
-public class TheCelebrityProblem {
+public class The_Celebrity_Problem {
     //Celebrity doesn't exists.
     /*static int[][] matrix = {
             {0, 0, 1, 0, 1},

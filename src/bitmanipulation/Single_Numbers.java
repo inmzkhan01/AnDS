@@ -3,7 +3,7 @@ package bitmanipulation;
 import java.util.Arrays;
 
 //https://leetcode.com/problems/single-number-iii/
-public class SingleNumbers {
+public class Single_Numbers {
     static int[] singleNumber(int[] nums) {
 
         if (nums == null || nums.length == 0) {

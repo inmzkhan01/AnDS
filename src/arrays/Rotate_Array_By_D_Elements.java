@@ -2,7 +2,7 @@ package arrays;
 
 import java.util.Arrays;
 
-public class Rotate_Array_By_D_elements {
+public class Rotate_Array_By_D_Elements {
 
     public static int[] rotate(int[] arr, int d) {
         int n = arr.length;

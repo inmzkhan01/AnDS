@@ -1,7 +1,7 @@
 package arrays;
 
 //https://www.geeksforgeeks.org/find-the-minimum-distance-between-two-numbers/
-public class Find_minimum_distance_between_two_numbers {
+public class Minimum_Distance_Between_Two_Numbers {
 
     static int minimumDistance(int[] arr, int x, int y) {
 

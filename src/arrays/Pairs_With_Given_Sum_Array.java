@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Find_pairs_with_given_sum_array {
+public class Pairs_With_Given_Sum_Array {
 
     static class IndexPair {
 

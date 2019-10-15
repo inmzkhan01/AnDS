@@ -1,8 +1,8 @@
-package arrays;
+package arrays.sorting;
 
 import java.util.Arrays;
 
-public class HeapSort {
+public class Heap_Sort {
 
     public static int[] sort(int[] arr) {
         int n = arr.length;

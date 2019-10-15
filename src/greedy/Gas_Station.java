@@ -1,4 +1,4 @@
-package Greedy;
+package greedy;
 
 // https://leetcode.com/problems/gas-station/
 public class Gas_Station {

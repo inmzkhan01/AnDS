@@ -2,7 +2,7 @@ package arrays;
 
 import java.util.*;
 
-public class MinMaxEfficiently {
+public class Min_Max_Efficiently {
 
     //Total comparisons require 2N-3
     static class NonEfficient {
