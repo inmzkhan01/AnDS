@@ -42,6 +42,7 @@ public class The_Celebrity_Problem {
         return celeb;
     }
 
+    // Does celebrity knows i ?
     static boolean knows(int celeb, int i) {
         return matrix[celeb][i] == 1;
     }

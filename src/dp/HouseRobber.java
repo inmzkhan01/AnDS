@@ -9,6 +9,7 @@ public class HouseRobber {
             if (nums == null || nums.length == 0) {
                 return 0;
             }
+
             int dp[] = new int[nums.length];
             dp[0] = nums[0];
 

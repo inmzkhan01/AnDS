@@ -1,4 +1,4 @@
-package misc;
+package probability;
 
 public class FlipCoin {
 

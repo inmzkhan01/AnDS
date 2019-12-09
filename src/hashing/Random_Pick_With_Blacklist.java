@@ -10,27 +10,27 @@ public class Random_Pick_With_Blacklist {
     int randomBound;
 
     public Random_Pick_With_Blacklist(int N, int[] blacklist) {
-        int whitelistLen = N - blacklist.length;
+        random = new Random();
+        randomBound = N - blacklist.length;
 
-        Set<Integer> numbersAfterWhitelistLen = new HashSet<>();
-        for (int i = whitelistLen; i < N; i++) {
-            numbersAfterWhitelistLen.add(i);
+        Set<Integer> whiteListNums = new HashSet<>();
+        for (int i = randomBound; i < N; i++) {
+            whiteListNums.add(i);
         }
         for (int b : blacklist) {
-            numbersAfterWhitelistLen.remove(b);
+            whiteListNums.remove(b);
         }
 
         blackListMap = new HashMap<>();
 
-        Iterator<Integer> whitelistAfterWhitelistLen = numbersAfterWhitelistLen.iterator();
+        Iterator<Integer> whiteListNumsItr = whiteListNums.iterator();
         for (int b : blacklist) {
-            if (b < whitelistLen) {
-                blackListMap.put(b, whitelistAfterWhitelistLen.next());
+            if (b < randomBound) {
+                blackListMap.put(b, whiteListNumsItr.next());
             }
         }
 
-        random = new Random();
-        randomBound = whitelistLen;
+
     }
 
     public int pick() {
@@ -39,9 +39,10 @@ public class Random_Pick_With_Blacklist {
     }
 
     public static void main(String[] args) {
-        Random_Pick_With_Blacklist randomPick = new Random_Pick_With_Blacklist(1, new int[0]);
-        System.out.println(randomPick.pick());
-        System.out.println(randomPick.pick());
+        Random_Pick_With_Blacklist randomPick = new Random_Pick_With_Blacklist(8, new int[]{1, 7});
+        int i = 0;
+        while (i++ < 10)
+            System.out.println(randomPick.pick());
     }
 
 }

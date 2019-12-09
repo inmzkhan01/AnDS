@@ -2,6 +2,8 @@ package arrays;
 
 import java.util.Stack;
 
+
+//https://www.ideserve.co.in/learn/next-great-element-in-an-array
 public class Stack_Next_greator_element_for_all_elements {
 
     public static void printNextGreater(int[] arr) {

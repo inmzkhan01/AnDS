@@ -52,6 +52,7 @@ public class CoinChangeProblem {
             int[] dp = new int[amount+1];
 
             for(int c=1; c<=amount; c++) {
+
                 int minCounts = Integer.MAX_VALUE;
 
                 for(int coin : coins) {

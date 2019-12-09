@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class BoxStacking {
 
-    class Box implements Comparable<Box> {
+    private static class Box implements Comparable<Box> {
         int height;
         int width;
         int depth;

@@ -1,7 +1,6 @@
 package dp;
 
 //https://leetcode.com/problems/ugly-number/
-//https://leetcode.com/problems/ugly-number-ii/
 public class UglyNumbers {
 
     static boolean isUgly(int num) {
@@ -15,7 +14,7 @@ public class UglyNumbers {
         return num == 1;
     }
 
-    static boolean ugly(int num) {
+    static boolean isUgly2(int num) {
         if (num <= 0) {
             return false;
         }
@@ -28,11 +27,11 @@ public class UglyNumbers {
         }
 
         if (num % 2 == 0) {
-            return isUgly(num / 2);
+            return isUgly2(num / 2);
         } else if (num % 3 == 0) {
-            return isUgly(num / 3);
+            return isUgly2(num / 3);
         } else if (num % 5 == 0) {
-            return isUgly(num / 5);
+            return isUgly2(num / 5);
         }
 
         return false;
@@ -40,7 +39,7 @@ public class UglyNumbers {
 
     public static void main(String[] args) {
         System.out.println("Is 12 ugly: " + isUgly(12));
-        System.out.println("Is 13 ugly: " + isUgly(13));
+        System.out.println("Is 13 ugly: " + isUgly2(13));
     }
 
 }

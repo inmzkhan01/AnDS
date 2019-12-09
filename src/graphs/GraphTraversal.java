@@ -8,14 +8,14 @@ public class GraphTraversal {
 
     public static void main(String[] args) {
         Node graphNode = GraphHelper.simpleConnectedGraph();
-        bfsUsingQueue(graphNode);
+        bfs(graphNode);
         //bfsRecursive(graphNode)  This is not possible. Recursion is based on stack and BFS require queue which is opposite to stack.
 
-        dfsUsingStack(graphNode);
+        dfs(graphNode);
         dfsRecursive(graphNode);
     }
 
-    static void bfsUsingQueue(Node node) {
+    static void bfs(Node node) {
         System.out.println("\nBFS using Queue:");
         Set<Integer> visited = new LinkedHashSet<>();
         Queue<Node> queue = new LinkedList<>();
@@ -33,7 +33,7 @@ public class GraphTraversal {
         System.out.println("\n");
     }
 
-    static void dfsUsingStack(Node node) {
+    static void dfs(Node node) {
         System.out.println("\nDFS using Stack:");
         Set<Integer> visited = new LinkedHashSet<>();
         Stack<Node> stack = new Stack<>();
@@ -65,24 +65,6 @@ public class GraphTraversal {
         visited.add(node.val);
         for(Node n : node.neighbors) {
             visitNode(n, visited);
-        }
-    }
-
-    static void bfsRecursive(Node node) {
-        System.out.println("\nDFS using Recursion:");
-        Set<Integer> visited = new HashSet<>();
-        visitNode(node, visited);
-        System.out.println("\n");
-    }
-
-    static void visitNodeBFS(Node node, Set<Integer> visited) {
-        if(visited.contains(node.val)) {
-            return;
-        }
-        System.out.print(" "+node.val);
-        visited.add(node.val);
-        for(Node n : node.neighbors) {
-            visitNodeBFS(n, visited);
         }
     }
 }

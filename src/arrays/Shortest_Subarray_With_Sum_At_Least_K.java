@@ -1,9 +1,10 @@
 package arrays;
 
-// https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
+// https://leetcode.com/problems/minimum-size-subarray-sum/
 public class Shortest_Subarray_With_Sum_At_Least_K {
 
-    static int shortestSubarray(int[] A, int K) {
+    public static int minSubArrayLen(int K, int[] A) {
+        if (A == null || A.length == 0) return 0;
         int N = A.length;
         int shortest = Integer.MAX_VALUE;
 
@@ -42,28 +43,13 @@ public class Shortest_Subarray_With_Sum_At_Least_K {
             end++;
         }
 
-        return shortest == Integer.MAX_VALUE ? -1 : shortest;
+        return shortest == Integer.MAX_VALUE ? 0 : shortest;
     }
 
 
     public static void main(String[] args) {
-        //System.out.println(shortestSubarray(new int[]{1, 2, 2, 4, 5}, 9));
-
-        //System.out.println(shortestSubarray(new int[]{1, 2}, 4));
-
-        //System.out.println(shortestSubarray(new int[]{2, -1, 2}, 3));
-
-        System.out.println(shortestSubarray(new int[]{84, -37, 32, 40, 95}, 167));
+        System.out.println(minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
 
     }
 
-    /**
-     *
-     * 1. Create sumArray having total sum till each index.
-     * 2. Create a window of elements of at least K sum
-     * 2a. if windows sum is smaller then previous window then update shortest.
-     * 3. Try to remove an element from start of window
-     * 3a. If windows sum is still at least K sum then update shortest.
-     *
-     */
 }

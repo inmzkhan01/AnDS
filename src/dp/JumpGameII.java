@@ -3,51 +3,52 @@ package dp;
 import java.util.HashMap;
 import java.util.Map;
 
+//https://leetcode.com/problems/jump-game-ii/
 public class JumpGameII {
 
     static class Recursive {
 
+        static int jump(int[] nums, int position, int step, int min) {
+            if (position >= nums.length - 1)
+                return Math.min(step, min);
+
+            if (nums[position] == 0)
+                return nums.length;
+
+            for (int i = 1; i <= nums[position]; i++) {
+                int jumps = jump(nums, position + i, step + 1, min);
+                if (jumps < min)
+                    min = jumps;
+            }
+            return min;
+
+        }
+
         static int jump(int[] nums) {
-            Map<String, Integer> memo = new HashMap<>();
-            return minimumJump(nums, 0, nums.length - 1, memo);
+            int step = 0, position = 0, min = nums.length;
+            return jump(nums, step, position, min);
+        }
+    }
+
+    static int jump(int[] nums) {
+        int jump = 0, currEnd = 0, currFarthest = 0;
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            currFarthest = Math.max(currFarthest, i + nums[i]);
+
+            if (i == currEnd) {
+                jump++;
+                currEnd = currFarthest;
+            }
         }
 
-        static int minimumJump(int[] nums, int start, int end, Map<String, Integer> memo) {
-
-            if (start == end) {
-                return 0;
-            }
-
-            if (nums[start] == 0) {
-                return Integer.MAX_VALUE;
-            }
-
-            String key = start + "|" + end;
-
-            if (memo.containsKey(key)) {
-                return memo.get(key);
-            }
-
-            int minJumps = Integer.MAX_VALUE;
-
-            for (int i = start + 1; i <= end; i++) {
-                if (i < (start + nums[start] + 1)) {
-                    memo.put(key, minimumJump(nums, i, end, memo));
-                    int jumps = memo.get(key);
-                    if (jumps < minJumps) {
-                        minJumps = jumps + 1;
-                    }
-                }
-            }
-
-            return minJumps;
-        }
-
+        return jump;
     }
 
 
     public static void main(String[] args) {
-        int[] nums = {1,2,1,1,1};
+        int[] nums = {1, 3, 1, 1, 1};
         System.out.println("\nRecursive: " + Recursive.jump(nums));
+        System.out.println("\nGreedy: " + jump(nums));
     }
 }

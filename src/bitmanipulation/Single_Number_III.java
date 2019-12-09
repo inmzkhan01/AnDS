@@ -2,8 +2,13 @@ package bitmanipulation;
 
 import java.util.Arrays;
 
-//https://leetcode.com/problems/single-number-iii/
-public class Single_Numbers {
+/**
+ *
+ * https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers
+ *
+ * https://leetcode.com/problems/single-number-iii/
+ */
+public class Single_Number_III {
     static int[] singleNumber(int[] nums) {
 
         if (nums == null || nums.length == 0) {

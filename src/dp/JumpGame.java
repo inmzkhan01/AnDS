@@ -1,29 +1,31 @@
 package dp;
 
 //https://leetcode.com/problems/jump-game/
-//https://leetcode.com/problems/jump-game-ii/
+
 public class JumpGame {
 
-    //This is bad solution.
-    static class TopDownDP {
+    static class Recursive {
 
         static boolean jump(int[] nums) {
-            boolean[] dp = new boolean[nums.length];
-            dp[0] = true;
+            int position = 0, min = nums.length;
+            return jump(nums, position);
+        }
 
-            for (int i = 0; i < nums.length - 1; i++) {
-                for (int j = i + 1; j - i <= nums[i] && j < nums.length; j++) {
-                    dp[j] = true;
-                }
-                if (!dp[i + 1]) {
-                    break;
+        static boolean jump(int[] nums, int position) {
+            if (position >= nums.length - 1)
+                return true;
+
+            for (int i = 1; i <= nums[position]; i++) {
+                if (jump(nums, position + i)) {
+                    return true;
                 }
             }
-            return dp[nums.length - 1];
+            return false;
         }
+
     }
 
-    static class Recursive {
+    static class RecursiveII {
 
         static boolean jump(int[] nums) {
             return jump(0, nums);
@@ -107,57 +109,60 @@ public class JumpGame {
     static class Greedy {
 
         static boolean canJump(int[] nums) {
-            int currGoodPosition = nums.length - 1;
+            int currPosition = nums.length - 1;
 
-            for (int i = nums.length - 1; i >= 0; i--) {
-                if (i + nums[i] >= currGoodPosition) {
-                    currGoodPosition = i;
+            for (int i = nums.length - 2; i >= 0; i--) {
+                if (i + nums[i] >= currPosition) {
+                    currPosition = i;
                 }
             }
-            return currGoodPosition == 0;
+
+            return currPosition == 0;
         }
     }
 
 
     public static void main(String[] args) {
-        /*int[] arr1 = {2, 3, 1, 1, 4};
-        System.out.println("arr1 TopDownDP: " + TopDownDP.jump(arr1));
+        int[] arr1 = {2, 3, 1, 1, 4};
         System.out.println("arr1 Recursive: " + Recursive.jump(arr1));
+        System.out.println("arr1 RecursiveII: " + RecursiveII.jump(arr1));
         System.out.println("arr1 RecursiveMemorization: " + RecursiveMemorization.jump(arr1));
         System.out.println("arr1 BottomUpDP: " + BottomUpDP.jump(arr1));
 
         int[] arr2 = {3, 1, 2, 0, 4};
-        System.out.println("\narr2 TopDownDP: " + TopDownDP.jump(arr2));
-        System.out.println("arr2 Recursive: " + Recursive.jump(arr2));
+        System.out.println("\narr2 Recursive: " + Recursive.jump(arr2));
+        System.out.println("arr2 RecursiveII: " + RecursiveII.jump(arr2));
         System.out.println("arr2 RecursiveMemorization: " + RecursiveMemorization.jump(arr2));
         System.out.println("arr2 BottomUpDP: " + BottomUpDP.jump(arr2));
 
         int[] arr3 = {2, 0};
-        System.out.println("\narr3 TopDownDP: " + TopDownDP.jump(arr3));
-        System.out.println("arr3 Recursive: " + Recursive.jump(arr3));
+        System.out.println("\narr3 Recursive: " + Recursive.jump(arr3));
+        System.out.println("arr3 RecursiveII: " + RecursiveII.jump(arr3));
         System.out.println("arr3 RecursiveMemorization: " + RecursiveMemorization.jump(arr3));
         System.out.println("arr3 BottomUpDP: " + BottomUpDP.jump(arr3));
 
         int[] arr4 = {3, 2, 1, 0, 4};
-        System.out.println("\narr4 TopDownDP: " + TopDownDP.jump(arr4));
-        System.out.println("arr4 Recursive: " + Recursive.jump(arr4));
+        System.out.println("\narr4 Recursive: " + Recursive.jump(arr4));
+        System.out.println("arr4 RecursiveII: " + RecursiveII.jump(arr4));
         System.out.println("arr4 RecursiveMemorization: " + RecursiveMemorization.jump(arr4));
         System.out.println("arr4 BottomUpDP: " + BottomUpDP.jump(arr4));
 
         int[] arr5 = {1, 5, 2, 1, 0, 2, 0};
-        System.out.println("\narr5 TopDownDP: " + TopDownDP.jump(arr5));
-        System.out.println("arr5 Recursive: " + Recursive.jump(arr5));
+        System.out.println("\narr5 Recursive: " + Recursive.jump(arr5));
+        System.out.println("arr5 RecursiveII: " + RecursiveII.jump(arr5));
         System.out.println("arr5 RecursiveMemorization: " + RecursiveMemorization.jump(arr5));
         System.out.println("arr5 BottomUpDP: " + BottomUpDP.jump(arr5));
 
         int[] arr6 = {5, 4, 3, 2, 1, 0, 0};
-        System.out.println("\narr6 TopDownDP: " + TopDownDP.jump(arr6));
-        System.out.println("arr6 Recursive: " + Recursive.jump(arr6));
+        System.out.println("\narr6 Recursive: " + Recursive.jump(arr6));
+        System.out.println("arr6 RecursiveII: " + RecursiveII.jump(arr6));
         System.out.println("arr6 RecursiveMemorization: " + RecursiveMemorization.jump(arr6));
-        System.out.println("arr6 BottomUpDP: " + BottomUpDP.jump(arr6));*/
+        System.out.println("arr6 BottomUpDP: " + BottomUpDP.jump(arr6));
 
         int[] nums = {2, 4, 2, 1, 0, 2, 0};
-        System.out.println("\narr5 RecursiveMemorization: " + RecursiveMemorization.jump(nums));
+        System.out.println("\nnums Recursive: " + Recursive.jump(nums));
+        System.out.println("nums RecursiveII: " + RecursiveII.jump(nums));
+        System.out.println("nums RecursiveMemorization: " + RecursiveMemorization.jump(nums));
         System.out.println("nums BottomUpDP: " + BottomUpDP.jump(nums));
         System.out.println("nums greedy: " + Greedy.canJump(nums));
     }

@@ -1,12 +1,11 @@
 package trees;
 
-import trees.Tree.Node;
 
 //BST.
 public class BinarySearchTree {
 
     public static void main(String[] args) {
-        Node root = Tree.binarySearchTree();
+        BinaryTreeNode root = BinaryTreeNode.binarySearchTree();
 
         inOrderTraversal(root);
         System.out.println();
@@ -24,7 +23,7 @@ public class BinarySearchTree {
 
         System.out.println(root);
 
-        Node searched = search(root,150);
+        BinaryTreeNode searched = search(root, 150);
         System.out.println(searched);
     }
 
@@ -33,7 +32,7 @@ public class BinarySearchTree {
      *
      * @param root
      */
-    static void inOrderTraversal(Node root) {
+    static void inOrderTraversal(BinaryTreeNode root) {
         if (root == null) {
             return;
         }
@@ -47,7 +46,7 @@ public class BinarySearchTree {
      *
      * @param root
      */
-    static void preOrderTraversal(Node root) {
+    static void preOrderTraversal(BinaryTreeNode root) {
         if (root == null) {
             return;
         }
@@ -61,7 +60,7 @@ public class BinarySearchTree {
      *
      * @param root
      */
-    static void postOrderTraversal(Node root) {
+    static void postOrderTraversal(BinaryTreeNode root) {
         if (root == null) {
             return;
         }
@@ -81,9 +80,9 @@ public class BinarySearchTree {
      *
      * @return
      */
-    static Node insert(int key, Node root) {
+    static BinaryTreeNode insert(int key, BinaryTreeNode root) {
         if(root == null) {
-            root = new Node(key);
+            root = new BinaryTreeNode(key);
             return root;
         }
 
@@ -94,17 +93,17 @@ public class BinarySearchTree {
         }
         return root;
 
-       /* Node node = findNode(root, key);
+       /* NodeData node = findNode(root, key);
         if (key < node.key) {
-            node.left = new Node(key);
+            node.left = new NodeData(key);
             return node.left;
         } else {
-            node.right = new Node(key);
+            node.right = new NodeData(key);
             return node.right;
         }*/
     }
 
-    static Node findNode(Node root, int key) {
+    static BinaryTreeNode findNode(BinaryTreeNode root, int key) {
         if (key < root.key && root.left != null) {
             return findNode(root.left, key);
         } else if (key > root.key && root.right != null) {
@@ -115,7 +114,7 @@ public class BinarySearchTree {
     }
 
 
-    static Node search(Node root, int key) {
+    static BinaryTreeNode search(BinaryTreeNode root, int key) {
         if (null == root || root.key == key) {
             return root;
         }
