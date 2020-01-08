@@ -1,4 +1,4 @@
-package bitmanipulation;
+package primitives;
 
 /**
  * https://leetcode.com/problems/single-number-ii/discuss/43297/Java-O(n)-easy-to-understand-solution-easily-extended-to-any-times-of-occurance

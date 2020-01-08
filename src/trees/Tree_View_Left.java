@@ -3,19 +3,19 @@ package trees;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BinaryTreeLeftView {
+public class Tree_View_Left {
 
     static class NodeData {
         int level;
-        BinaryTreeNode treeNode;
+        TreeNode treeNode;
 
-        public NodeData(BinaryTreeNode treeNode, int level) {
+        public NodeData(TreeNode treeNode, int level) {
             this.treeNode = treeNode;
             this.level = level;
         }
     }
 
-    public void printLeftView(BinaryTreeNode root) {
+    public void printLeftView(TreeNode root) {
         int currentLevel = 0;
 
         Queue<NodeData> queue = new LinkedList<>();
@@ -25,7 +25,7 @@ public class BinaryTreeLeftView {
             NodeData nodeData = queue.poll();
 
             if (currentLevel < nodeData.level) {
-                System.out.println(nodeData.treeNode.key);
+                System.out.println(nodeData.treeNode.val);
                 currentLevel = nodeData.level;
             }
 
@@ -40,7 +40,7 @@ public class BinaryTreeLeftView {
     }
 
     public static void main(String[] args) {
-        BinaryTreeNode root = BinaryTreeNode.binarySearchTree();
-        new BinaryTreeLeftView().printLeftView(root);
+        TreeNode root = TreeNode.binarySearchTree();
+        new Tree_View_Left().printLeftView(root);
     }
 }

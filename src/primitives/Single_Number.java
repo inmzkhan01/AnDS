@@ -1,4 +1,4 @@
-package bitmanipulation;
+package primitives;
 
 // https://leetcode.com/problems/single-number/
 public class Single_Number {

@@ -1,8 +1,5 @@
 package dp;
 
-import java.util.HashMap;
-import java.util.Map;
-
 //https://leetcode.com/problems/jump-game-ii/
 public class JumpGameII {
 
