@@ -3,6 +3,47 @@ package primitives;
 public class Count_Set_Bit_in_a_Integer {
 
     /**
+     */
+
+    // Using shift operator : iterative
+    static class SimpleMethod {
+        static int countSetBit(int n) {
+            int count = 0;
+            while (n != 0) {
+                count += (n & 1);  // Drops the lowest set bit of x.
+                n >>>= 1;
+                //n >>= 1;
+            }
+            return count;
+        }
+    }
+
+    // Using shift operator : recursive
+    static class SimpleMethod_Recursive {
+        static int countSetBit(int n) {
+            if (n == 0) return 0;
+
+            return (n & 1) + countSetBit(n >> 1);
+        }
+    }
+
+    static class EPI_Algorithm {
+        static int countSetBit(int n) {
+            int count = 0;
+            while (n > 0) {
+                count++;
+
+                //Right most set bit and all other bit of y are 0s.
+                int y = (n & ~(n - 1));
+
+                // To unset right most bit.
+                n = n ^ y;
+            }
+            return count;
+        }
+    }
+
+    /**
      * Subtracting 1 from a decimal number flips all the bits after the rightmost set bit(which is 1) including the rightmost set bit.
      * for example :
      * 10 in binary is 00001010
@@ -17,7 +58,7 @@ public class Count_Set_Bit_in_a_Integer {
             int count = 0;
             while (n > 0) {
                 count++;
-                n &= (n - 1);
+                n &= (n - 1);  // Drops the lowest set bit of x.
             }
             return count;
         }
@@ -31,52 +72,35 @@ public class Count_Set_Bit_in_a_Integer {
         }
     }
 
-    static class EPI_Algorithm {
-        static int countSetBit(int n) {
-            int count = 0;
-            while (n > 0) {
-                count++;
+    static class LookupTableMethod {
+        static int[] setBitsCount = new int[256];
 
-                //Right most set bit and all other bit of y are 0s.
-                int y = (n & ~(n - 1));
-
-                //int y = (n & -n); //IntelliJ suggestion.
-
-                // To unset right most bit.
-                n = n ^ y;
+        static {
+            setBitsCount[0] = 0;
+            for (int i = 0; i < 256; i++) {
+                setBitsCount[i] = setBitsCount[i >> 1] + (i & 1);
             }
-            return count;
         }
-    }
 
-    // Using shift operator : iterative
-    static class SimpleMethod {
-        static int countSetBit(int n) {
-            int count = 0;
-            while (n > 0) {
-                count += (n & 1);
-                n >>= 1;
-            }
-            return count;
-        }
-    }
+        private static int WORD_SIZE = 8;
+        private static int BIT_MASK = 0xff;
 
-    // Using shift operator : recursive
-    static class RecursiveMethod {
-        static int countSetBit(int n) {
-            if (n == 0) return 0;
-
-            return (n & 1) + countSetBit(n >> 1);
+        public static int countSetBits(int n) {
+            return (setBitsCount[(n >> (WORD_SIZE * 3)) & BIT_MASK] +
+                    setBitsCount[(n >> (WORD_SIZE * 2)) & BIT_MASK] +
+                    setBitsCount[(n >> WORD_SIZE) & BIT_MASK] +
+                    setBitsCount[n & BIT_MASK]);
         }
     }
 
 
     public static void main(String[] args) {
-        System.out.println(Brian_Kernighan_Algorithm.countSetBit(9));
-        System.out.println(Brian_Kernighan_Algorithm_Recursive.countSetBit(9));
-        System.out.println(SimpleMethod.countSetBit(9));
-        System.out.println(RecursiveMethod.countSetBit(9));
-        System.out.println(EPI_Algorithm.countSetBit(9));
+        System.out.println(Brian_Kernighan_Algorithm.countSetBit(6352));
+        System.out.println(Brian_Kernighan_Algorithm_Recursive.countSetBit(6352));
+        System.out.println(SimpleMethod.countSetBit(6352));
+        System.out.println(SimpleMethod_Recursive.countSetBit(6352));
+        System.out.println(EPI_Algorithm.countSetBit(6352));
+        System.out.println(LookupTableMethod.countSetBits(6352));
     }
 
 }

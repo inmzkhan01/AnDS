@@ -1,8 +1,5 @@
 package dp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Knapsack {
 
     private class Recursive {
@@ -35,10 +32,11 @@ public class Knapsack {
             for (int i = 1; i <= n; i++) {
                 for (int w = 1; w <= W; w++) {
                     int item = i - 1;
-                    if (wt[item] <= w)
-                        K[i][w] = Math.max(val[item] + K[i - 1][w - wt[item]], K[i - 1][w]);
-                    else
+                    if (wt[item] > w)
                         K[i][w] = K[i - 1][w];
+                    else
+                        K[i][w] = Math.max(val[item] + K[i - 1][w - wt[item]], K[i - 1][w]);
+
                 }
             }
             return K[n][W];

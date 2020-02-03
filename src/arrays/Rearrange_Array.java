@@ -10,9 +10,9 @@ public class Rearrange_Array {
 
 
     public static void rearrange(int[] B) {
-        for (int i = 0; i < B.length - 1; ++i) {
-            if (((i & 1) == 0 && B[i] > B[i + 1]) || ((i & 1) != 0 && B[i] < B[i + 1])) {
-                swap(B, i, i + 1);
+        for (int i = 1; i < B.length; ++i) {
+            if (((i & 1) == 1 && B[i] < B[i - 1]) || ((i & 1) == 0 && B[i] > B[i - 1])) {
+                swap(B, i, i - 1);
             }
         }
     }

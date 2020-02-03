@@ -33,7 +33,7 @@ public class Dutch_National_Flag_Problem {
 
     public static void main(String[] args) {
         int[] a = {6, 3, 7, 6, 1, 9, 6, 2, 8, 5};
-        solve(a, a.length-1);
+        solve(a, 4);
         System.out.println(Arrays.toString(a));
     }
 

@@ -22,8 +22,7 @@ public class JumpGameII {
         }
 
         static int jump(int[] nums) {
-            int step = 0, position = 0, min = nums.length;
-            return jump(nums, step, position, min);
+            return jump(nums, 0, 0, nums.length);
         }
     }
 

@@ -13,10 +13,12 @@ public class LongestPalindromicSubstring {
 
         boolean palindrom[][] = new boolean[n][n];
 
+        // len 1
         for (int i = 0; i < n; i++) {
             palindrom[i][i] = true;
         }
 
+        // len 2
         for (int i = 0; i < n - 1; i++) {
             if (input.charAt(i) == input.charAt(i + 1)) {
                 palindrom[i][i + 1] = true;
@@ -25,13 +27,13 @@ public class LongestPalindromicSubstring {
             }
         }
 
-        for (int currLength = 3; currLength <= n; currLength++) {
-            for (int i = 0; i < n - currLength + 1; i++) {
-                int j = i + currLength - 1;
+        for (int len = 3; len <= n; len++) {
+            for (int i = 0; i < n - len + 1; i++) {
+                int j = i + len - 1;
                 if (input.charAt(i) == input.charAt(j) && palindrom[i + 1][j - 1]) {
                     palindrom[i][j] = true;
                     palindromeBeginIndex = i;
-                    maxLength = currLength;
+                    maxLength = len;
                 }
             }
         }

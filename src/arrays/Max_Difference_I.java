@@ -2,7 +2,7 @@ package arrays;
 
 /**
  * https://www.geeksforgeeks.org/maximum-difference-between-two-elements/
- *
+ * <p>
  * Compute max (A[j]-A[i]) where 0<=i<j<=n-1
  */
 public class Max_Difference_I {

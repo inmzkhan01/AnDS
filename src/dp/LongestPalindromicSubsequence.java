@@ -32,7 +32,7 @@ public class LongestPalindromicSubsequence {
                 return String.valueOf(text.charAt(i));
             }
             if (text.charAt(i) == text.charAt(j)) {
-                return text.charAt(i) + LPSString(text, i + 1, j - 1) + text.charAt(j);
+                return text.charAt(i) + LPSString(text, i + 1, j - 1) + text.charAt(i);
             }
 
             String left = LPSString(text, i, j - 1);
@@ -74,11 +74,16 @@ public class LongestPalindromicSubsequence {
                 dp[i][i] = 1;
             }
 
-
             // len 2
-            for (int i = 0, j = 1; i < n-1; i++, j++) {
-                dp[i][j] = s[i] == s[j] ? 2 : 1;
+            for (int i = 0; i < n - 1; i++) {
+                if(s[i] == s[i+1])
+                    dp[i][i+1] = 2;
+                else
+                    dp[i][i+1] = 1;
             }
+            /*for (int i = 0, j = 1; i < n-1; i++, j++) {
+                dp[i][j] = s[i] == s[j] ? 2 : 1;
+            }*/
 
             // len 3 and up
             for (int len = 3; len <= n; len++) {
@@ -86,7 +91,7 @@ public class LongestPalindromicSubsequence {
                 for (int i = 0, j = len - 1; j < n; i++, j++) {
 
                     // better of without left or without right
-                    int max = Math.max(dp[i][j - 1], dp[i + 1][j]);
+                    int max = Math.max(dp[i + 1][j], dp[i][j - 1]);
 
                     if (s[i] == s[j]) {
                         // now check 2 plus without left and without right

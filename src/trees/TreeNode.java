@@ -1,5 +1,8 @@
 package trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TreeNode {
 
     public int val;
@@ -38,6 +41,8 @@ public class TreeNode {
      * @return
      */
     public static TreeNode binarySearchTree() {
+
+
         TreeNode root = new TreeNode(100);
         root.left = new TreeNode(50);
         root.right = new TreeNode(150);
@@ -52,6 +57,10 @@ public class TreeNode {
         root.right.right.right = new TreeNode(200);
 
         return root;
+    }
+
+    public static void main(String[] args) {
+        binarySearchTree();
     }
 
 }

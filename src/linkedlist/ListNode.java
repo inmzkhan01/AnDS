@@ -25,4 +25,9 @@ public class ListNode {
         sb.append(head.val);
         return sb.toString();
     }
+
+    public static ListNode linkedList() {
+        return new ListNode(0, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4)))));
+    }
+
 }

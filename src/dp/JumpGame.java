@@ -7,8 +7,7 @@ public class JumpGame {
     static class Recursive {
 
         static boolean jump(int[] nums) {
-            int position = 0, min = nums.length;
-            return jump(nums, position);
+            return jump(nums, 0);
         }
 
         static boolean jump(int[] nums, int position) {
@@ -28,18 +27,18 @@ public class JumpGame {
     static class RecursiveII {
 
         static boolean jump(int[] nums) {
-            return jump(0, nums);
+            return jump(nums, 0);
         }
 
-        static boolean jump(int position, int[] nums) {
-            if (position == nums.length - 1) {
+        static boolean jump(int[] nums, int position) {
+            if (position >= nums.length - 1) {
                 return true;
             }
 
             int farthestJump = Math.min(position + nums[position], nums.length - 1);
 
             for (int newPosition = position + 1; newPosition <= farthestJump; newPosition++) {
-                if (jump(newPosition, nums)) {
+                if (jump(nums, newPosition)) {
                     return true;
                 }
             }
@@ -60,11 +59,11 @@ public class JumpGame {
             }
             memo[memo.length - 1] = Index.GOOD;
 
-            boolean canJump = jump(0, nums, memo);
+            boolean canJump = jump(nums, 0, memo);
             return canJump;
         }
 
-        static boolean jump(int position, int[] nums, Index[] memo) {
+        static boolean jump(int[] nums, int position, Index[] memo) {
             if (memo[position] != Index.UNKNOWN) {
                 return memo[position] == Index.GOOD ? true : false;
             }
@@ -72,7 +71,7 @@ public class JumpGame {
             int farthestJump = Math.min(position + nums[position], nums.length - 1);
 
             for (int nextJump = farthestJump; nextJump > position; nextJump--) {
-                if (jump(nextJump, nums, memo)) {
+                if (jump(nums, nextJump, memo)) {
                     memo[position] = Index.GOOD;
                     return true;
                 }
