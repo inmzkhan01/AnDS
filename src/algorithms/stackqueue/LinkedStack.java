@@ -1,4 +1,4 @@
-package stackqueue;
+package algorithms.stackqueue;
 
 public class LinkedStack<Item> {
 

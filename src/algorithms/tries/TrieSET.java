@@ -1,17 +1,15 @@
 package algorithms.tries;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * This class represents an ordered set of strings alphabet.
  */
-public class TrieSET implements Iterable<String> {
+public class TrieSET {
     private static final int R = 26;        // alphabet
 
     private Node root;      // root of trie
-    private int n;          // number of keys in trie
 
     // R-way trie node
     private static class Node {
@@ -43,8 +41,6 @@ public class TrieSET implements Iterable<String> {
             x = new Node();
 
         if (d == key.length()) {
-            if (!x.isString)
-                n++;
             x.isString = true;
         } else {
             char c = key.charAt(d);
@@ -60,8 +56,6 @@ public class TrieSET implements Iterable<String> {
     private Node delete(Node x, String key, int d) {
         if (x == null) return null;
         if (d == key.length()) {
-            if (x.isString)
-                n--;
             x.isString = false;
         } else {
             char c = key.charAt(d);
@@ -76,62 +70,26 @@ public class TrieSET implements Iterable<String> {
         return null;
     }
 
-    public int size() {
-        return n;
+    public Iterable<String> keys() {
+        List<String> keys = new ArrayList<>();
+        collect(root, "", keys);
+        return keys;
     }
 
-    public boolean isEmpty() {
-        return size() == 0;
-    }
-
-    public Iterator<String> iterator() {
-        return keysWithPrefix("").iterator();
+    private void collect(Node x, String prefix, List<String> results) {
+        if (x == null) return;
+        if (x.isString)
+            results.add(prefix);
+        for (char c = 0; c < R; c++) {
+            collect(x.next[c], prefix + c, results);
+        }
     }
 
     public Iterable<String> keysWithPrefix(String prefix) {
         List<String> results = new ArrayList<>();
         Node x = get(root, prefix, 0);
-        collect(x, new StringBuilder(prefix), results);
+        collect(x, prefix, results);
         return results;
-    }
-
-    private void collect(Node x, StringBuilder prefix, List<String> results) {
-        if (x == null) return;
-        if (x.isString)
-            results.add(prefix.toString());
-        for (char c = 0; c < R; c++) {
-            prefix.append(c);
-            collect(x.next[c], prefix, results);
-            prefix.deleteCharAt(prefix.length() - 1);
-        }
-    }
-
-    public Iterable<String> keysThatMatch(String pattern) {
-        List<String> results = new ArrayList<>();
-        StringBuilder prefix = new StringBuilder();
-        collect(root, prefix, pattern, results);
-        return results;
-    }
-
-    private void collect(Node x, StringBuilder prefix, String pattern, List<String> results) {
-        if (x == null) return;
-        int d = prefix.length();
-        if (d == pattern.length() && x.isString)
-            results.add(prefix.toString());
-        if (d == pattern.length())
-            return;
-        char c = pattern.charAt(d);
-        if (c == '.') {
-            for (char ch = 0; ch < R; ch++) {
-                prefix.append(ch);
-                collect(x.next[ch], prefix, pattern, results);
-                prefix.deleteCharAt(prefix.length() - 1);
-            }
-        } else {
-            prefix.append(c);
-            collect(x.next[c], prefix, pattern, results);
-            prefix.deleteCharAt(prefix.length() - 1);
-        }
     }
 
     /**

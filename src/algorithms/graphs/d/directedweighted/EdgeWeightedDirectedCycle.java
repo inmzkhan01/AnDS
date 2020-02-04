@@ -1,6 +1,6 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
-import stackqueue.ResizingArrayStack;
+import algorithms.stackqueue.ResizingArrayStack;
 
 public class EdgeWeightedDirectedCycle {
     private boolean[] marked;             // marked[v] = has vertex v been marked?

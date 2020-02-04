@@ -1,4 +1,4 @@
-package exercises;
+package algorithms.exercises;
 
 import java.util.ArrayList;
 import java.util.List;

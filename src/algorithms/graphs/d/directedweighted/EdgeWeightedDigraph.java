@@ -1,4 +1,4 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
 import edu.princeton.cs.algs4.ResizingArrayStack;
 

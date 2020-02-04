@@ -1,4 +1,4 @@
-package priorityqueue;
+package algorithms.priorityqueue;
 
 public class UnorderedMaxPQ<T extends Comparable<T>> {
 

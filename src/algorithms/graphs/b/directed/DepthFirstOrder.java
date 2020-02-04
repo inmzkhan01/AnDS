@@ -1,6 +1,7 @@
-package graphs.b.directed;
+package algorithms.graphs.b.directed;
 
-import stackqueue.ResizingArrayStack;
+
+import algorithms.stackqueue.ResizingArrayStack;
 
 /**
  * Topological Sort. Applicable only to DAG (Directed Acyclic Graph)

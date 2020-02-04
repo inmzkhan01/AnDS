@@ -1,6 +1,7 @@
-package graphs.a.undirected;
+package algorithms.graphs.a.undirected;
 
-import unionfind.QuickUnion;
+
+import algorithms.unionfind.QuickUnion;
 
 import java.util.*;
 

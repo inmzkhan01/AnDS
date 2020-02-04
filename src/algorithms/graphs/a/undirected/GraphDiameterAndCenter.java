@@ -1,4 +1,4 @@
-package graphs.a.undirected;
+package algorithms.graphs.a.undirected;
 
 /**
  * Diameter and center of a tree. Given a connected graph with no cycles

@@ -4,7 +4,7 @@
  *  Last modified:     1/1/2019
  **************************************************************************** */
 
-package exercises.percolation;
+package algorithms.exercises.percolation;
 
 public class Percolation {
 

@@ -1,4 +1,4 @@
-package graphs.a.undirected;
+package algorithms.graphs.a.undirected;
 
 public class ConnectedComponents {
 

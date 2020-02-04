@@ -1,4 +1,4 @@
-package strings;
+package algorithms.strings;
 
 /**
  * Most-significant-digit-first string sort.

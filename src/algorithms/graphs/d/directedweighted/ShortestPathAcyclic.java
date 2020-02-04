@@ -1,6 +1,6 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
-import stackqueue.ResizingArrayStack;
+import algorithms.stackqueue.ResizingArrayStack;
 
 /**
  * Works for Edge weighted DAG, negative weights but not negative cycles.

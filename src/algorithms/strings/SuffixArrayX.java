@@ -1,4 +1,4 @@
-package strings;
+package algorithms.strings;
 
 public class SuffixArrayX {
 

@@ -1,4 +1,4 @@
-package graphs.maxflowmincut;
+package algorithms.graphs.maxflowmincut;
 
 public class FlowEdge {
 

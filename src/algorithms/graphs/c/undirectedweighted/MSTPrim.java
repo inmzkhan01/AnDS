@@ -1,7 +1,7 @@
-package graphs.c.undirectedweighted;
+package algorithms.graphs.c.undirectedweighted;
 
 
-import priorityqueue.IndexMinPQ;
+import algorithms.priorityqueue.IndexMinPQ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class MSTPrim {
         edgeTo = new Edge[G.V()];
         distTo = new double[G.V()];
         marked = new boolean[G.V()];
-        pq = new IndexMinPQ<Double>(G.V());
+        pq = new IndexMinPQ<>(G.V());
         for (int v = 0; v < G.V(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
 

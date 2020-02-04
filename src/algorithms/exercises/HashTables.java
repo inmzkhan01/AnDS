@@ -1,4 +1,4 @@
-package exercises;
+package algorithms.exercises;
 
 public class HashTables {
 

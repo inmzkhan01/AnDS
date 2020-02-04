@@ -1,8 +1,7 @@
-package graphs.b.directed;
+package algorithms.graphs.b.directed;
 
-
-import stackqueue.ResizingArrayQueue;
-import stackqueue.ResizingArrayStack;
+import algorithms.stackqueue.ResizingArrayQueue;
+import algorithms.stackqueue.ResizingArrayStack;
 
 public class DirectedGraphCycleBFS {
 

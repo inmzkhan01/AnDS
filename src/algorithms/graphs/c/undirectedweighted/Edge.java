@@ -1,4 +1,4 @@
-package graphs.c.undirectedweighted;
+package algorithms.graphs.c.undirectedweighted;
 
 public class Edge implements Comparable<Edge> {
 

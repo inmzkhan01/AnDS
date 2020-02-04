@@ -1,4 +1,4 @@
-package graphs.c.undirectedweighted;
+package algorithms.graphs.c.undirectedweighted;
 
 import java.util.ArrayList;
 import java.util.List;

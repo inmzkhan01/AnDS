@@ -1,7 +1,7 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
 
-import stackqueue.ResizingArrayStack;
+import algorithms.stackqueue.ResizingArrayStack;
 
 /**
  * Can find shortest path if no negative cycle.

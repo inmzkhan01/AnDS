@@ -1,4 +1,4 @@
-package symboltable;
+package algorithms.symboltable;
 
 import java.util.ArrayList;
 import java.util.List;

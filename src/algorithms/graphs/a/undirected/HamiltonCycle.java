@@ -1,4 +1,4 @@
-package graphs.a.undirected;
+package algorithms.graphs.a.undirected;
 
 /**
  * Hamilton cycle (Classical NP-complete problem):

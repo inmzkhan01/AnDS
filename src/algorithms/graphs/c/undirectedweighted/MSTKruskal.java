@@ -1,7 +1,7 @@
-package graphs.c.undirectedweighted;
+package algorithms.graphs.c.undirectedweighted;
 
-import edu.princeton.cs.algs4.MinPQ;
-import unionfind.WeightedQuickUnionUF;
+import algorithms.priorityqueue.MinPQ;
+import algorithms.unionfind.WeightedQuickUnionUF;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class MSTKruskal {
     private double weight;
 
     public MSTKruskal(EdgeWeightedGraph G) {
-        MinPQ<Edge> minPQ = new MinPQ<>();
+        MinPQ<Edge> minPQ = new MinPQ<>(G.E());
         for (Edge e : G.edges()) {
             minPQ.insert(e);
         }

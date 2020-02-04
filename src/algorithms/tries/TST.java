@@ -9,17 +9,12 @@ import java.util.List;
  */
 public class TST<Value> {
 
-    private int n;              // size
     private Node<Value> root;   // root of TST
 
     private static class Node<Value> {
         private char c;                        // character
         private Node<Value> left, mid, right;  // left, middle, and right subtries
         private Value val;                     // value associated with string
-    }
-
-    public int size() {
-        return n;
     }
 
     public boolean contains(String key) {
@@ -44,7 +39,6 @@ public class TST<Value> {
     }
 
     public void put(String key, Value val) {
-        if (!contains(key)) n++;
         root = put(root, key, val, 0);
     }
 
@@ -61,6 +55,33 @@ public class TST<Value> {
         return x;
     }
 
+    public Iterable<String> keys() {
+        List<String> list = new ArrayList<>();
+        collect(root, new StringBuilder(), list);
+        return list;
+    }
+
+    // all keys in subtrie rooted at x with given prefix
+    private void collect(Node<Value> x, StringBuilder prefix, List<String> list) {
+        if (x == null) return;
+        collect(x.left, prefix, list);
+        if (x.val != null) list.add(prefix.toString() + x.c);
+        collect(x.mid, prefix.append(x.c), list);
+        prefix.deleteCharAt(prefix.length() - 1);
+        collect(x.right, prefix, list);
+    }
+
+    public Iterable<String> keysWithPrefix(String prefix) {
+        List<String> list = new ArrayList<>();
+        Node<Value> x = get(root, prefix, 0);
+        if (x == null) return list;
+        if (x.val != null) list.add(prefix);
+        collect(x.mid, new StringBuilder(prefix), list);
+        return list;
+    }
+
+    // returns the length of the longest string key in the subtrie rooted at x that is a prefix of the query string,
+    // assuming the first d character match and we have already found a prefix match of length length
     public String longestPrefixOf(String query) {
         if (query.length() == 0) return null;
         int length = 0;
@@ -78,51 +99,5 @@ public class TST<Value> {
         }
         return query.substring(0, length);
     }
-
-    public Iterable<String> keys() {
-        List<String> list = new ArrayList<>();
-        collect(root, new StringBuilder(), list);
-        return list;
-    }
-
-    public Iterable<String> keysWithPrefix(String prefix) {
-        List<String> list = new ArrayList<>();
-        Node<Value> x = get(root, prefix, 0);
-        if (x == null) return list;
-        if (x.val != null) list.add(prefix);
-        collect(x.mid, new StringBuilder(prefix), list);
-        return list;
-    }
-
-    // all keys in subtrie rooted at x with given prefix
-    private void collect(Node<Value> x, StringBuilder prefix, List<String> list) {
-        if (x == null) return;
-        collect(x.left, prefix, list);
-        if (x.val != null) list.add(prefix.toString() + x.c);
-        collect(x.mid, prefix.append(x.c), list);
-        prefix.deleteCharAt(prefix.length() - 1);
-        collect(x.right, prefix, list);
-    }
-
-    public Iterable<String> keysThatMatch(String pattern) {
-        List<String> list = new ArrayList<>();
-        collect(root, new StringBuilder(), 0, pattern, list);
-        return list;
-    }
-
-    private void collect(Node<Value> x, StringBuilder prefix, int i, String pattern, List<String> list) {
-        if (x == null) return;
-        char c = pattern.charAt(i);
-        if (c == '.' || c < x.c) collect(x.left, prefix, i, pattern, list);
-        if (c == '.' || c == x.c) {
-            if (i == pattern.length() - 1 && x.val != null) list.add(prefix.toString() + x.c);
-            if (i < pattern.length() - 1) {
-                collect(x.mid, prefix.append(x.c), i + 1, pattern, list);
-                prefix.deleteCharAt(prefix.length() - 1);
-            }
-        }
-        if (c == '.' || c > x.c) collect(x.right, prefix, i, pattern, list);
-    }
-
 
 }

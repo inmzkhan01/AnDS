@@ -1,4 +1,4 @@
-package graphs.maxflowmincut;
+package algorithms.graphs.maxflowmincut;
 
 import edu.princeton.cs.algs4.StdRandom;
 

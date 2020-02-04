@@ -1,4 +1,4 @@
-package priorityqueue;
+package algorithms.priorityqueue;
 
 public class MinPQ<T extends Comparable<T>> {
 
@@ -45,6 +45,10 @@ public class MinPQ<T extends Comparable<T>> {
 
     public int size() {
         return n;
+    }
+
+    public boolean isEmpty() {
+        return n == 0;
     }
 
     private void swim(int k) {

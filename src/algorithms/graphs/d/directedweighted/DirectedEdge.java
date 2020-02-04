@@ -1,4 +1,4 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
 
 public class DirectedEdge implements Comparable<DirectedEdge> {

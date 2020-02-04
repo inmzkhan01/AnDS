@@ -1,6 +1,6 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
-import stackqueue.ResizingArrayStack;
+import algorithms.stackqueue.ResizingArrayStack;
 
 import java.util.LinkedList;
 import java.util.Queue;

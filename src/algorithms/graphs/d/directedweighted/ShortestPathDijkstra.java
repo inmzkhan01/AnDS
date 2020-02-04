@@ -1,7 +1,7 @@
-package graphs.d.directedweighted;
+package algorithms.graphs.d.directedweighted;
 
-import priorityqueue.IndexMinPQ;
-import stackqueue.ResizingArrayStack;
+import algorithms.priorityqueue.IndexMinPQ;
+import algorithms.stackqueue.ResizingArrayStack;
 
 /**
  * Works for non-negative weights, directed cycles.

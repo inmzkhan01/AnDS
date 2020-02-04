@@ -1,6 +1,6 @@
-package graphs.a.undirected;
+package algorithms.graphs.a.undirected;
 
-import stackqueue.ResizingArrayStack;
+import algorithms.stackqueue.ResizingArrayStack;
 
 import java.util.Arrays;
 import java.util.LinkedList;

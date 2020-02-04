@@ -1,4 +1,4 @@
-package sortings;
+package algorithms.sortings;
 
 abstract class Sort {
 

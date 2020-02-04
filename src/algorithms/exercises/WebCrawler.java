@@ -1,6 +1,6 @@
-package exercises;
+package algorithms.exercises;
 
-import stackqueue.ResizingArrayQueue;
+import algorithms.stackqueue.ResizingArrayQueue;
 
 import java.net.URL;
 import java.net.URLConnection;

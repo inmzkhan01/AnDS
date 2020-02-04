@@ -1,6 +1,6 @@
-package exercises;
+package algorithms.exercises;
 
-import graphs.a.undirected.Graph;
+import algorithms.graphs.a.undirected.Graph;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,6 +1,7 @@
-package strings;
+package algorithms.strings;
 
-import sortings.Shuffle;
+
+import algorithms.sortings.Shuffle;
 
 /**
  * Sorts an array of strings using 3-way radix quicksort

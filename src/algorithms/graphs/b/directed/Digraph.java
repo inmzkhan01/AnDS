@@ -1,4 +1,4 @@
-package graphs.b.directed;
+package algorithms.graphs.b.directed;
 
 import java.util.ArrayList;
 import java.util.List;

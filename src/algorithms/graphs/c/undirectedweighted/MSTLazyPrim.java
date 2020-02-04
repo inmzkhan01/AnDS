@@ -1,4 +1,4 @@
-package graphs.c.undirectedweighted;
+package algorithms.graphs.c.undirectedweighted;
 
 import edu.princeton.cs.algs4.MinPQ;
 

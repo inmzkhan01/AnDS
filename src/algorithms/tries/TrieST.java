@@ -10,7 +10,6 @@ public class TrieST<Value> {
     private static final int R = 26;    // alphabets
 
     private Node root = new Node();     // root of trie
-    private int n;                      // number of keys in trie
 
     // R-way trie node
     private static class Node {
@@ -20,10 +19,6 @@ public class TrieST<Value> {
 
     public boolean contains(String key) {
         return get(key) != null;
-    }
-
-    public int size() {
-        return n;
     }
 
     public Value get(String key) {
@@ -50,8 +45,6 @@ public class TrieST<Value> {
             x = new Node();
 
         if (d == key.length()) {
-            if (x.val == null)
-                n++;
             x.val = val;
             return x;
         }
@@ -69,8 +62,6 @@ public class TrieST<Value> {
         if (x == null) return null;
 
         if (d == key.length()) {
-            if (x.val != null)
-                n--;
             x.val = null;
         } else {
             char c = key.charAt(d);
