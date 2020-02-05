@@ -56,7 +56,7 @@ public class ResizingArrayStack<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            return i >= 0;
+            return i > 0;
         }
 
         @Override
