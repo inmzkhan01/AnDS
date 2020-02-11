@@ -19,8 +19,8 @@ public class MaxPQ<T extends Comparable<T>> {
     }
 
     public void insert(T item) {
-        if (n == pq.length - 1)
-            resize(2 * pq.length);
+        /*if (n == pq.length - 1)
+            resize(2 * pq.length);*/
 
         pq[++n] = item;
         swim(n);
@@ -33,7 +33,7 @@ public class MaxPQ<T extends Comparable<T>> {
         n--;
         sink(1);
 
-        if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
+        //if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
 
         return max;
     }
@@ -78,7 +78,6 @@ public class MaxPQ<T extends Comparable<T>> {
     }
 
     private void resize(int capacity) {
-        assert capacity > n;
         T[] temp = (T[]) new Object[capacity];
         for (int i = 1; i <= n; i++) {
             temp[i] = pq[i];

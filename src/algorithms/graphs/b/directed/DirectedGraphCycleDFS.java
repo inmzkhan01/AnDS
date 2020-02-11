@@ -4,10 +4,10 @@ import algorithms.stackqueue.ResizingArrayStack;
 
 public class DirectedGraphCycleDFS {
 
-    private boolean[] marked;        // marked[v] = has vertex v been marked?
-    private int[] edgeTo;            // edgeTo[v] = previous vertex on path to v
-    private boolean[] onStack;       // onStack[v] = is vertex on the stack?
-    private ResizingArrayStack<Integer> cycle;    // directed cycle (or null if no such cycle)
+    private boolean[] marked;                       // marked[v] = has vertex v been marked?
+    private int[] edgeTo;                           // edgeTo[v] = previous vertex on path to v
+    private boolean[] onStack;                      // onStack[v] = is vertex on the stack?
+    private ResizingArrayStack<Integer> cycle;      // directed cycle (or null if no such cycle)
 
     public DirectedGraphCycleDFS(Digraph G) {
         marked = new boolean[G.V()];
