@@ -7,9 +7,9 @@ public class MinMaxDepth {
 
     /**
      * Max Depth.
-     * The maximum depth of a binary tree is the number of nodes along the longest path from the root node down to the farthest leaf node.
+     * The maximum depth of a binary tree is the number of nodes along the longest path from the root Person down to the farthest leaf Person.
      * <p>
-     * NOTE : The path has to end on a leaf node.
+     * NOTE : The path has to end on a leaf Person.
      */
     public int maxDepth(TreeNode node) {
         return height(node);
@@ -27,9 +27,9 @@ public class MinMaxDepth {
 
     /**
      * Min Depth.
-     * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+     * The minimum depth is the number of nodes along the shortest path from the root Person down to the nearest leaf Person.
      * <p>
-     * NOTE : The path has to end on a leaf node.
+     * NOTE : The path has to end on a leaf Person.
      */
     public int minDepth(TreeNode node) {
         if (node == null)

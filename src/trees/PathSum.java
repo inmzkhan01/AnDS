@@ -3,7 +3,7 @@ package trees;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Path_Sum {
+public class PathSum {
 
     /**
      * Has path sum ?

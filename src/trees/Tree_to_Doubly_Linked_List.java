@@ -45,7 +45,7 @@ public class Tree_to_Doubly_Linked_List {
                 node = node.left;
             }
 
-            // he leftmost node is head of linked list, return it
+            // he leftmost Person is head of linked list, return it
             return node;
         }
     }

@@ -36,7 +36,7 @@ public class ElementarySymbolTables {
     }
 
     /**
-     * 2. Check if a binary tree is a Binary Search Tree.
+     * 2. Check if a binary tree is a Binary Search tree.
      * <p>
      * Given a binary tree where each 𝙽𝚘𝚍𝚎 contains a key, determine whether it is a binary search tree.
      * Use extra space proportional to the height of the tree.

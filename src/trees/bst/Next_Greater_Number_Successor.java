@@ -8,8 +8,6 @@ public class Next_Greater_Number_Successor {
 
     class SimpleSolution {
         public TreeNode getSuccessor(TreeNode root, int data) {
-            if (root == null) return null;
-
             TreeNode temp = null;
             while (root != null) {
                 if (root.val > data) {

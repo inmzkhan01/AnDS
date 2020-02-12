@@ -2,7 +2,6 @@ package algorithms.trees;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * https://www.geeksforgeeks.org/kth-smallest-element-in-bst-using-o1-extra-space/
@@ -23,6 +22,9 @@ public class BST<K extends Comparable<K>> {
         }
     }
 
+    /**
+     * Find key.
+     */
     public K get(K key) {
         Node x = get(root, key);
         return null == x ? null : x.key;
@@ -41,6 +43,9 @@ public class BST<K extends Comparable<K>> {
             return x;
     }
 
+    /**
+     * Add key.
+     */
     public void add(K key) {
         root = add(root, key);
     }
@@ -61,6 +66,9 @@ public class BST<K extends Comparable<K>> {
         return x;
     }
 
+    /**
+     * Delete key
+     */
     public void delete(K key) {
         root = delete(root, key);
     }
@@ -108,26 +116,278 @@ public class BST<K extends Comparable<K>> {
         return x;
     }
 
-    public List<K> inorder() {
-        List<K> keys = new ArrayList<>();
-        Stack<Node> stack = new Stack<>();
-
+    /**
+     * Find maximum key.
+     */
+    public K max() {
+        if (root == null) return null;
         Node x = root;
-
-        while (x != null || !stack.isEmpty()) {
-
-            while (x != null) {
-                stack.push(x);
-                x = x.left;
-            }
-
-            x = stack.pop();
-            keys.add(x.key);
+        while (x.right != null) {
             x = x.right;
         }
-        return keys;
+        return x.key;
     }
 
+    /**
+     * Find minimum key.
+     */
+    public K min() {
+        if (root == null) return null;
+        Node x = root;
+        while (x.left != null) {
+            x = x.left;
+        }
+        return x.key;
+    }
+
+    /**
+     * Delete minimum key.
+     */
+    public void deleteMin() {
+        if (null == root)
+            return;
+        root = deleteMin(root);
+    }
+
+    /**
+     * Delete maximum key.
+     */
+    public void deleteMax() {
+        if (null == root)
+            return;
+        root = deleteMax(root);
+    }
+
+    private Node deleteMax(Node x) {
+        if (null == x.right)
+            return x.left;
+
+        x.right = deleteMax(x.right);
+        return x;
+    }
+
+    /**
+     * Key present.
+     */
+    public boolean contains(K key) {
+        return null != get(key);
+    }
+
+    /**
+     * Is BST empty?
+     */
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    /**
+     * Get BST size.
+     */
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node x) {
+        if (x == null)
+            return 0;
+
+        int left = size(x.left);
+        int right = size(x.right);
+
+        return left + right + 1;
+    }
+
+    /**
+     * Get BST size for key range
+     */
+    public int size(K lo, K hi) {
+        if (lo.compareTo(hi) > 0)
+            return 0;
+
+        if (contains(hi))
+            return rank(hi) - rank(lo) + 1;
+        else
+            return rank(hi) - rank(lo);
+    }
+
+    /**
+     * Get the number of keys in the subtree less than given key
+     */
+    public int rank(K key) {
+        return rank(root, key);
+    }
+
+    private int rank(Node x, K key) {
+        if (null == x)
+            return 0;
+
+        int cmp = key.compareTo(x.key);
+
+        if (cmp < 0)
+            return rank(x.left, key);
+        else if (cmp > 0)
+            return 1 + size(x.left) + rank(x.right, key);
+        else
+            return size(x.left);
+    }
+
+    /**
+     * Return key at given Rank;
+     */
+    public K select(int k) {
+        Node node = select(root, k);
+        return null == node ? null : node.key;
+    }
+
+    private Node select(Node x, int k) {
+        if (null == x) return null;
+
+        int sz = size(x.left);
+
+        if (k == sz)
+            return x;
+        else if (k < sz)
+            return select(x.left, k);
+        else
+            return select(x.right, k - (sz + 1));
+    }
+
+    /**
+     * Largest key less than or equal to key.
+     */
+    public K floor(K key) {
+        Node floor = floor(root, key);
+        return null == floor ? null : floor.key;
+    }
+
+    private Node floor(Node x, K key) {
+        if (null == x)
+            return null;
+
+        int cmp = key.compareTo(x.key);
+
+        if (cmp == 0)
+            return x;
+
+        if (cmp < 0)
+            return floor(x.left, key);
+
+        Node t = floor(x.right, key);
+
+        if (null != t)
+            return t;
+        else
+            return x;
+    }
+
+    /**
+     * Smallest key greater than or equal to key.
+     */
+    public K ceiling(K key) {
+        Node ceiling = ceiling(root, key);
+        return null == ceiling ? null : ceiling.key;
+    }
+
+    private Node ceiling(Node x, K key) {
+        if (null == x)
+            return null;
+
+        int cmp = key.compareTo(x.key);
+
+        if (cmp == 0)
+            return x;
+
+        if (cmp > 0)
+            return ceiling(x.right, key);
+
+        Node t = ceiling(x.left, key);
+
+        if (null != t)
+            return t;
+        else
+            return x;
+    }
+
+    /**
+     * Find key just greater than given key.
+     */
+    public K successor(K key) {
+        return successor(root, key);
+    }
+
+    private K successor(Node node, K key) {
+        K successor = null;
+        while (node != null) {
+            if (node.key.compareTo(key) > 0) {
+                successor = node.key;
+                node = node.left;
+            } else
+                node = node.right;
+        }
+        return successor;
+    }
+
+    /**
+     * Find key just less than given key.
+     */
+    public K predecessor(K key) {
+        return predecessor(root, key);
+    }
+
+    private K predecessor(Node node, K key) {
+        K predecessor = null;
+        while (node != null) {
+            if (node.key.compareTo(key) < 0) {
+                predecessor = node.key;
+                node = node.right;
+            } else
+                node = node.left;
+        }
+        return predecessor;
+    }
+
+    /**
+     * Get all keys.
+     */
+    public Iterable<K> keys() {
+        List<K> list = new ArrayList<>();
+        inorder(root, list);
+        return list;
+    }
+
+    private void inorder(Node x, List<K> list) {
+        if (null == x)
+            return;
+        inorder(x.left, list);
+        list.add(x.key);
+        inorder(x.right, list);
+    }
+
+    /**
+     * Get keys in given key range.
+     */
+    public Iterable<K> keys(K lo, K hi) {
+        List<K> list = new ArrayList<>();
+        inorder(root, lo, hi, list);
+        return list;
+    }
+
+    private void inorder(Node x, K lo, K hi, List<K> list) {
+        if (x == null)
+            return;
+
+        int cmplo = lo.compareTo(x.key);
+        int cmphi = hi.compareTo(x.key);
+
+        // if lo is less than current node, go left
+        if (cmplo < 0) inorder(x.left, lo, hi, list);
+
+        // if current node within the range[lo, hi], add to the queue
+        if (cmplo <= 0 && cmphi >= 0) list.add(x.key);
+
+        // if hi is greater than current node, go right
+        if (cmphi > 0) inorder(x.right, lo, hi, list);
+    }
 
     public static void main(String[] args) {
         BST<Character> bst = new BST<>();
@@ -140,8 +400,7 @@ public class BST<K extends Comparable<K>> {
         bst.add('M');
         bst.add('U');
 
-        System.out.println("Inorder: " + bst.inorder());
+        System.out.println("Inorder: " + bst.keys());
     }
-
 
 }

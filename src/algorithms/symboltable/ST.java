@@ -128,23 +128,12 @@ public class ST<K extends Comparable<K>, V> {
 
     public int size() {
         return size(root);
-        //return sizeRecursive(root);
     }
 
     private int size(Node x) {
         if (x == null)
             return 0;
         return x.count;
-    }
-
-    private int sizeRecursive(Node x) {
-        if (x == null)
-            return 0;
-
-        int left = sizeRecursive(x.left);
-        int right = sizeRecursive(x.right);
-
-        return left + right + 1;
     }
 
     public int size(K lo, K hi) {
@@ -177,9 +166,6 @@ public class ST<K extends Comparable<K>, V> {
 
     /**
      * Largest key less than or equal to key.
-     *
-     * @param key
-     * @return
      */
     public K floor(K key) {
         Node floor = floor(root, key);
@@ -208,9 +194,6 @@ public class ST<K extends Comparable<K>, V> {
 
     /**
      * Smallest key greater than or equal to key.
-     *
-     * @param key
-     * @return
      */
     public K ceiling(K key) {
         Node ceiling = ceiling(root, key);
@@ -238,10 +221,7 @@ public class ST<K extends Comparable<K>, V> {
     }
 
     /**
-     * Get the number of keys in the subtree less than given key
-     *
-     * @param key
-     * @return
+     * Get the number of keys in the subtree less than given key.
      */
     public int rank(K key) {
         return rank(root, key);
@@ -262,10 +242,7 @@ public class ST<K extends Comparable<K>, V> {
     }
 
     /**
-     * Return key at given Rank;
-     *
-     * @param k
-     * @return
+     * Return key at given Rank.
      */
     public K select(int k) {
         Node node = select(root, k);
@@ -321,6 +298,20 @@ public class ST<K extends Comparable<K>, V> {
         return x;
     }
 
+    public Iterable<K> keys() {
+        List<K> list = new ArrayList<>();
+        inorder(root, list);
+        return list;
+    }
+
+    private void inorder(Node x, List<K> list) {
+        if (null == x)
+            return;
+        inorder(x.left, list);
+        list.add(x.key);
+        inorder(x.right, list);
+    }
+
     public Iterable<K> keys(K lo, K hi) {
         List<K> list = new ArrayList<>();
         inorder(root, lo, hi, list);
@@ -342,20 +333,6 @@ public class ST<K extends Comparable<K>, V> {
 
         // if hi is greater than current node, go right
         if (cmphi > 0) inorder(x.right, lo, hi, list);
-    }
-
-    public Iterable<K> keys() {
-        List<K> list = new ArrayList<>();
-        inorder(root, list);
-        return list;
-    }
-
-    private void inorder(Node x, List<K> list) {
-        if (null == x)
-            return;
-        inorder(x.left, list);
-        list.add(x.key);
-        inorder(x.right, list);
     }
 
     public static void main(String[] args) {
