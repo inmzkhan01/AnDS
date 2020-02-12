@@ -2,6 +2,9 @@ package algorithms.trees;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * https://www.geeksforgeeks.org/kth-smallest-element-in-bst-using-o1-extra-space/
@@ -253,6 +256,97 @@ public class BST<K extends Comparable<K>> {
     }
 
     /**
+     * Find the kth largest key in given BST
+     */
+    public K kthLargest(int k) {
+        AtomicReference<K> ans = new AtomicReference<>();
+        kthLargest(root, k, new AtomicInteger(0), ans);
+        return ans.get();
+    }
+
+    public void kthLargest(Node node, int k, AtomicInteger count, AtomicReference<K> ans) {
+        // Base cases, the second condition is important to avoid unnecessary recursive calls
+        if (node == null || count.get() >= k)
+            return;
+
+        // Follow reverse inorder traversal so that the largest element is visited first
+        kthLargest(node.right, k, count, ans);
+        // Increment count of visited nodes and If count becomes k now, then this is the k'th largest
+        if (count.incrementAndGet() == k) {
+            ans.set(node.key);
+            return;
+        }
+        kthLargest(node.left, k, count, ans);
+    }
+
+    /**
+     * Find the kth smallest key in given BST using iterative reverse inorder.
+     */
+    public K kthLargest2(int k) {
+        Stack<Node> stack = new Stack<>();
+        Node node = root;
+        while (node != null || !stack.isEmpty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.right;
+            }
+
+            node = stack.pop();
+            k--;
+            if (k == 0)
+                return node.key;
+
+            node = node.left;
+        }
+        return null;
+    }
+
+    /**
+     * Find the kth smallest key in given BST
+     */
+    public K kthSmallest(int k) {
+        AtomicReference<K> ans = new AtomicReference<>();
+        kthSmallest(root, k, new AtomicInteger(0), ans);
+        return ans.get();
+    }
+
+    private void kthSmallest(Node node, int k, AtomicInteger count, AtomicReference<K> ans) {
+        // Base cases, the second condition is important to avoid unnecessary recursive calls
+        if (node == null || count.get() >= k)
+            return;
+
+        kthSmallest(node.left, k, count, ans);
+        // Increment count of visited nodes and If count becomes k now, then this is the k'th smallest
+        if (count.incrementAndGet() == k) {
+            ans.set(node.key);
+            return;
+        }
+        kthSmallest(node.right, k, count, ans);
+    }
+
+    /**
+     * Find the kth smallest key in given BST using iterative inorder.
+     */
+    public K kthSmallest2(int k) {
+        Stack<Node> stack = new Stack<>();
+        Node node = root;
+        while (node != null || !stack.isEmpty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+
+            node = stack.pop();
+            k--;
+            if (k == 0)
+                return node.key;
+
+            node = node.right;
+        }
+        return null;
+    }
+
+    /**
      * Largest key less than or equal to key.
      */
     public K floor(K key) {
@@ -315,14 +409,14 @@ public class BST<K extends Comparable<K>> {
         return successor(root, key);
     }
 
-    private K successor(Node node, K key) {
+    private K successor(Node x, K key) {
         K successor = null;
-        while (node != null) {
-            if (node.key.compareTo(key) > 0) {
-                successor = node.key;
-                node = node.left;
+        while (x != null) {
+            if (key.compareTo(x.key) < 0) {
+                successor = x.key;
+                x = x.left;
             } else
-                node = node.right;
+                x = x.right;
         }
         return successor;
     }
@@ -334,14 +428,14 @@ public class BST<K extends Comparable<K>> {
         return predecessor(root, key);
     }
 
-    private K predecessor(Node node, K key) {
+    private K predecessor(Node x, K key) {
         K predecessor = null;
-        while (node != null) {
-            if (node.key.compareTo(key) < 0) {
-                predecessor = node.key;
-                node = node.right;
+        while (x != null) {
+            if (key.compareTo(x.key) > 0) {
+                predecessor = x.key;
+                x = x.right;
             } else
-                node = node.left;
+                x = x.left;
         }
         return predecessor;
     }
@@ -401,6 +495,12 @@ public class BST<K extends Comparable<K>> {
         bst.add('U');
 
         System.out.println("Inorder: " + bst.keys());
+        System.out.println("Successor(E): " + bst.successor('F'));
+        System.out.println("Predecessor(E): " + bst.predecessor('F'));
+        System.out.println("kthLargest(4): " + bst.kthLargest(4));
+        System.out.println("kthSmallest(4): " + bst.kthSmallest(4));
+        System.out.println("kthLargest2(4): " + bst.kthLargest2(4));
+        System.out.println("kthSmallest2(4): " + bst.kthSmallest2(4));
     }
 
 }

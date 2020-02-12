@@ -1,4 +1,4 @@
-package algorithms.symboltable;
+package algorithms.trees;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  * <p>
  * This is binary search tree based Symbol Table which out perform above two STs.
  */
-public class ST<K extends Comparable<K>, V> {
+public class SymbolTable<K extends Comparable<K>, V> {
 
     private Node root;
 
@@ -336,7 +336,7 @@ public class ST<K extends Comparable<K>, V> {
     }
 
     public static void main(String[] args) {
-        ST<Character, Integer> st = new ST<>();
+        SymbolTable<Character, Integer> st = new SymbolTable<>();
 
         System.out.println("Empty: " + st.isEmpty());
 
