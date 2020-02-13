@@ -11,9 +11,9 @@ class SegmentTree {
     SegmentTree(int a[]) {
         n = a.length;
 
-        //The max size of this array is about 2 * 2 ^ log2(n) + 1
+        //The max size of segment tree array is about 2 * 2 ^ (log2(n) + 1)
         int maxSize = (int) (2 * Math.pow(2.0, Math.floor((Math.log((double) n) / Math.log(2.0)) + 1)));
-        tree = new int[maxSize]; // Memory allocation
+        tree = new int[maxSize];
         arr = Arrays.copyOf(a, n);
 
         build(0, n - 1, 0);
@@ -30,8 +30,9 @@ class SegmentTree {
 
         // If there are more than one elements, then recur for left and right subtrees and store the sum of values in this node.
         int mid = ss + (se - ss) / 2;
-
-        tree[si] = build(ss, mid, left(si)) + build((mid + 1), se, right(si));
+        int left = build(ss, mid, left(si));
+        int right = build((mid + 1), se, right(si));
+        tree[si] = left + right;
         return tree[si];
     }
 
@@ -44,36 +45,38 @@ class SegmentTree {
     }
 
     public int getSum(int qs, int qe) {
-        return getSum(0, n - 1, qs, qe, 0);
+        return getSum(0, n - 1, 0, qs, qe);
     }
 
-    private int getSum(int ss, int se, int qs, int qe, int si) {
-        // If segment of this node is a part of given range, then return the sum of the segment.
-        if (qs <= ss && qe >= se)
-            return tree[si];
-
+    private int getSum(int ss, int se, int si, int qs, int qe) {
         // If segment of this node is outside the given range
         if (se < qs || ss > qe)
             return 0;
 
+        // If segment of this node is a part of given range, then return the sum of the segment.
+        if (qs <= ss && qe >= se)
+            return tree[si];
+
         // If a part of this segment overlaps with the given range
         int mid = ss + (se - ss) / 2;
-        return getSum(ss, mid, qs, qe, left(si)) + getSum(mid + 1, se, qs, qe, right(si));
+        int leftSum = getSum(ss, mid, left(si), qs, qe);
+        int rightSum = getSum(mid + 1, se, right(si), qs, qe);
+        return leftSum + rightSum;
     }
 
-    public void update(int i, int newVal) {
+    public void update(int i, int value) {
         // Get the difference between new value and old value
-        int diff = newVal - arr[i];
+        int diff = value - arr[i];
 
         // Update the value in array
-        arr[i] = newVal;
+        arr[i] = value;
 
         // Update the values of nodes in segment tree
-        update(0, n - 1, i, diff, 0);
+        update(0, n - 1, 0, i, diff);
     }
 
 
-    private void update(int ss, int se, int i, int diff, int si) {
+    private void update(int ss, int se, int si, int i, int diff) {
         // Base Case: If the input index lies outside the range of this segment
         if (i < ss || i > se)
             return;
@@ -83,13 +86,13 @@ class SegmentTree {
 
         if (se != ss) {
             int mid = ss + (se - ss) / 2;
-            update(ss, mid, i, diff, left(si));
-            update((mid + 1), se, i, diff, right(si));
+            update(ss, mid, left(si), i, diff);
+            update((mid + 1), se, right(si), i, diff);
         }
     }
 
     public static void main(String args[]) {
-        int arr[] = {1, 3, 5, 7, 9, 11};
+        int arr[] = {1, 3, 5, 7, 3, 6};
 
         // Build segment tree from given array
         SegmentTree tree = new SegmentTree(arr);

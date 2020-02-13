@@ -1,7 +1,5 @@
 package trees;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Construct_Binary_Tree_From_Preorder_and_Inorder {
@@ -10,28 +8,37 @@ public class Construct_Binary_Tree_From_Preorder_and_Inorder {
 
         public static TreeNode buildTree(int[] preorder, int[] inorder) {
             int n = inorder.length;
-            Map<Integer, Integer> map = new HashMap<>();
-            for (int i = 0; i < n; i++) {
-                map.put(inorder[i], i);
-            }
-            return buildTree(preorder, new AtomicInteger(0), 0, n - 1, map);
+            return buildTree(preorder, inorder, 0, n - 1, new AtomicInteger(0));
         }
 
-        private static TreeNode buildTree(int[] preorder, AtomicInteger pIndex, int start, int end, Map<Integer, Integer> map) {
+        private static TreeNode buildTree(int[] preorder, int[] inorder, int start, int end, AtomicInteger pIndex) {
+
             if (start > end) {
                 return null;
             }
 
             TreeNode node = new TreeNode(preorder[pIndex.getAndIncrement()]);
 
-            int index = map.get(node.val);
+            if (start == end)
+                return node;
+
+            int index = search(node.val, inorder, start, end);
 
             // Recursively build left first.
-            node.left = buildTree(preorder, pIndex, start, index - 1, map);
+            node.left = buildTree(preorder, inorder, start, index - 1, pIndex);
 
-            node.right = buildTree(preorder, pIndex, index + 1, end, map);
+            node.right = buildTree(preorder, inorder, index + 1, end, pIndex);
 
             return node;
+        }
+
+        private static int search(int num, int[] inorder, int start, int end) {
+            int i;
+            for (i = start; i < end; i++) {
+                if (inorder[i] == num)
+                    return i;
+            }
+            return i;
         }
     }
 
@@ -71,11 +78,14 @@ public class Construct_Binary_Tree_From_Preorder_and_Inorder {
         }
     }
 
+
     public static void main(String[] args) {
         TreeNode root = TreeNode.binarySearchTree();
         TreeNode root2 = RecursiveI.buildTree(Traversals.preorder(root), Traversals.inorder(root));
         System.out.println(root);
         System.out.println(root2);
+
+        System.out.println(RecursiveI.buildTree(new int[]{3, 2, 4, 1, 5}, new int[]{1, 2, 3, 4, 5}));
     }
 
 }

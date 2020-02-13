@@ -154,72 +154,99 @@ public class Order_of_People_Heights {
      */
     static class Editorial {
 
-        public static class SegTree {
-            public int[] tree;
-            public int size;
+        public static List<Integer> order(List<Integer> A, List<Integer> B) {
+            Person[] arr = new Person[A.size()];
+            for (int i = 0; i < A.size(); i++)
+                arr[i] = new Person(A.get(i), B.get(i));
 
-            public SegTree(int n) {
-                this.size = n;
-                tree = new int[4 * n + 2];
+            Arrays.sort(arr);
+
+            SegTree segTree = new SegTree(A.size());
+
+            List<Integer> ans = new ArrayList<>();
+            for (int i = 0; i < A.size(); i++)
+                ans.add(0);
+
+            for (int i = 0; i < A.size(); i++) {
+                int ind = segTree.query(arr[i].infront + 1);
+                ans.set(ind, arr[i].height);
+                segTree.update(ind, 0);
+            }
+            return ans;
+        }
+
+        private static class SegTree {
+            private int[] tree;
+            private int n;
+
+            SegTree(int n) {
+                this.n = n;
+                //The max size of segment tree array is about 2 * 2 ^ (log2(n) + 1)
+                int maxSize = (int) (2 * Math.pow(2.0, Math.floor((Math.log((double) n) / Math.log(2.0)) + 1)));
+                this.tree = new int[maxSize];
                 build(0, n - 1, 0);
             }
 
-            public int left(int i) {
+            int left(int i) {
                 return 2 * i + 1;
             }
 
-            public int right(int i) {
+            int right(int i) {
                 return 2 * i + 2;
             }
 
-            public int build(int start, int end, int index) {
-                if (start > end)
-                    return 0;
-                if (start == end) {
-                    tree[index] = 1;
-                    return tree[index];
+            int build(int ss, int se, int si) {
+                if (ss == se) {
+                    tree[si] = 1;
+                    return tree[si];
                 }
-                int mid = start + (end - start) / 2;
-                tree[index] = build(start, mid, left(index)) + build(mid + 1, end, right(index));
-                return tree[index];
+                int mid = ss + (se - ss) / 2;
+                tree[si] = build(ss, mid, left(si)) + build(mid + 1, se, right(si));
+                return tree[si];
             }
 
-            public int query(int spaces, int start, int end, int index) {
-                if (start > end)
-                    return 0;
-                if (start == end)
-                    return start;
+            int query(int spaces) {
+                return query(0, n - 1, 0, spaces);
+            }
 
-                int mid = start + (end - start) / 2;
-                int leftSpace = tree[left(index)];
+            private int query(int ss, int se, int si, int spaces) {
+                if (ss == se)
+                    return ss;
+
+                int mid = ss + (se - ss) / 2;
+                int leftSpace = tree[left(si)];
                 if (leftSpace >= spaces)
-                    return query(spaces, start, mid, left(index));
+                    return query(ss, mid, left(si), spaces);
                 else
-                    return query(spaces - leftSpace, mid + 1, end, right(index));
+                    return query(mid + 1, se, right(si), spaces - leftSpace);
             }
 
-            public int update(int i, int value, int start, int end, int index) {
-                if (start > end)
-                    return 0;
-                if (start == end) {
-                    tree[index] = value;
-                    return value;
+            void update(int i, int value) {
+                update(0, n - 1, 0, i, value);
+            }
+
+            private void update(int ss, int se, int si, int i, int value) {
+                if (ss == se) {
+                    tree[si] = value;
+                    return;
                 }
-                int mid = start + (end - start) / 2;
+
+                int mid = ss + (se - ss) / 2;
 
                 if (i <= mid)
-                    update(i, value, start, mid, left(index));
+                    update(ss, mid, left(si), i, value);
                 else
-                    update(i, value, mid + 1, end, right(index));
-                return tree[index] = tree[left(index)] + tree[right(index)];
+                    update(mid + 1, se, right(si), i, value);
+
+                tree[si] = tree[left(si)] + tree[right(si)];
             }
         }
 
-        public static class Person implements Comparable<Person> {
+        private static class Person implements Comparable<Person> {
             int height;
             int infront;
 
-            public Person(int a, int b) {
+            Person(int a, int b) {
                 this.height = a;
                 this.infront = b;
             }
@@ -229,32 +256,19 @@ public class Order_of_People_Heights {
             }
         }
 
-        public static List<Integer> order(List<Integer> A, List<Integer> B) {
-            Person[] arr = new Person[A.size()];
-            for (int i = 0; i < A.size(); i++)
-                arr[i] = new Person(A.get(i), B.get(i));
-
-            Arrays.sort(arr);
-
-            SegTree s = new SegTree(A.size());
-
-            List<Integer> ans = new ArrayList<>();
-            for (int i = 0; i < A.size(); i++)
-                ans.add(0);
-
-            for (int i = 0; i < A.size(); i++) {
-                int ind = s.query(arr[i].infront + 1, 0, A.size() - 1, 0);
-                ans.set(ind, arr[i].height);
-                s.update(ind, 0, 0, A.size() - 1, 0);
-            }
-            return ans;
-        }
     }
 
     public static void main(String[] args) {
         List<Integer> heights = Stream.of(5, 3, 2, 6, 1, 4).collect(Collectors.toList());
         List<Integer> infronts = Stream.of(0, 1, 2, 0, 3, 2).collect(Collectors.toList());
         List<Integer> order = Editorial.order(heights, infronts);
+
+        System.out.println("Actual order is: " + order);
+
+        heights = Stream.of(5, 1, 3).collect(Collectors.toList());
+        infronts = Stream.of(0, 2, 1).collect(Collectors.toList());
+        order = Editorial.order(heights, infronts);
+
         System.out.println("Actual order is: " + order);
     }
 

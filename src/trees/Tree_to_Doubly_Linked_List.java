@@ -2,51 +2,57 @@ package trees;
 
 public class Tree_to_Doubly_Linked_List {
 
-    public static class Node {
-        int value;
-        Node left;
-        Node right;
+    static TreeNode head;
+    static TreeNode tail;
+
+    /**
+     * Return head of the double linked list.
+     */
+    public static TreeNode treeToList(TreeNode root) {
+        head = null;
+        tail = null;
+        buildDLL(root);
+        return head;
     }
 
-    public static class InorderTraversalMethod {
+    private static void buildDLL(TreeNode node) {
+        if (node == null)
+            return;
 
-        static Node prev;
+        buildDLL(node.left);
 
-        public static Node treeToList(Node root) {
-            prev = null;
+        // Set head pointer to leftmost node.
+        if (head == null)
+            head = node;
 
-            fixedLeftPtr(root);
+        // Point tail's right to current node.
+        if (tail != null)
+            tail.right = node;
 
-            fixedRightPtr(root);
+        // Point node's left to tail.
+        node.left = tail;
 
-            return root;
+        // Current node is now tail.
+        tail = node;
+
+        buildDLL(node.right);
+    }
+
+
+    public static void main(String[] args) {
+        treeToList(TreeNode.binarySearchTree());
+
+        TreeNode x = head;
+        while (x != null) {
+            System.out.print(x.val + " ");
+            x = x.right;
         }
+        System.out.println();
 
-        private static void fixedLeftPtr(Node node) {
-            if (node == null)
-                return;
-
-            fixedLeftPtr(node.left);
-            node.left = prev;
-            prev = node;
-            fixedLeftPtr(node.right);
-        }
-
-        private static Node fixedRightPtr(Node node) {
-            while (node.right != null) {
-                node = node.right;
-            }
-
-            while (node != null && node.left != null) {
-                Node left = node.left;
-                left.right = node;
-
-                // Backward
-                node = node.left;
-            }
-
-            // he leftmost Person is head of linked list, return it
-            return node;
+        x = tail;
+        while (x != null) {
+            System.out.print(x.val + " ");
+            x = x.left;
         }
     }
 

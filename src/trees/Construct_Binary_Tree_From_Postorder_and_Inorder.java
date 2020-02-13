@@ -1,7 +1,5 @@
 package trees;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Construct_Binary_Tree_From_Postorder_and_Inorder {
@@ -10,28 +8,36 @@ public class Construct_Binary_Tree_From_Postorder_and_Inorder {
 
         public static TreeNode buildTree(int[] postorder, int[] inorder) {
             int n = inorder.length;
-            Map<Integer, Integer> map = new HashMap<>();
-            for (int i = 0; i < n; i++) {
-                map.put(inorder[i], i);
-            }
-            return buildTree(postorder, new AtomicInteger(n - 1), 0, n - 1, map);
+            return buildTree(postorder, inorder, 0, n - 1, new AtomicInteger(n - 1));
         }
 
-        private static TreeNode buildTree(int[] postorder, AtomicInteger pIndex, int start, int end, Map<Integer, Integer> map) {
+        private static TreeNode buildTree(int[] postorder, int[] inorder, int start, int end, AtomicInteger pIndex) {
             if (start > end) {
                 return null;
             }
 
             TreeNode node = new TreeNode(postorder[pIndex.getAndDecrement()]);
 
-            int index = map.get(node.val);
+            if (start == end)
+                return node;
+
+            int index = search(node.val, inorder, start, end);
 
             // Recursively build right first.
-            node.right = buildTree(postorder, pIndex, index + 1, end, map);
+            node.right = buildTree(postorder, inorder, index + 1, end, pIndex);
 
-            node.left = buildTree(postorder, pIndex, start, index - 1, map);
+            node.left = buildTree(postorder, inorder, start, index - 1, pIndex);
 
             return node;
+        }
+
+        private static int search(int num, int[] inorder, int start, int end) {
+            int i;
+            for (i = start; i <= end; i++) {
+                if (inorder[i] == num)
+                    return i;
+            }
+            return i;
         }
 
     }
