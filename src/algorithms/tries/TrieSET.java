@@ -7,23 +7,23 @@ import java.util.List;
  * This class represents an ordered set of strings alphabet.
  */
 public class TrieSET {
-    private static final int R = 26;        // alphabet
+    private static final int R = 256;        // alphabet
 
-    private Node root;      // root of trie
+    private TrieNode root;      // root of trie
 
     // R-way trie node
-    private static class Node {
-        private Node[] next = new Node[R];
+    private static class TrieNode {
+        private TrieNode[] next = new TrieNode[R];
         private boolean isString;
     }
 
     public boolean contains(String key) {
-        Node x = get(root, key, 0);
+        TrieNode x = get(root, key, 0);
         if (x == null) return false;
         return x.isString;
     }
 
-    private Node get(Node x, String key, int d) {
+    private TrieNode get(TrieNode x, String key, int d) {
         if (x == null) return null;
 
         if (d == key.length()) return x;
@@ -36,9 +36,9 @@ public class TrieSET {
         root = add(root, key, 0);
     }
 
-    private Node add(Node x, String key, int d) {
+    private TrieNode add(TrieNode x, String key, int d) {
         if (x == null)
-            x = new Node();
+            x = new TrieNode();
 
         if (d == key.length()) {
             x.isString = true;
@@ -53,7 +53,7 @@ public class TrieSET {
         root = delete(root, key, 0);
     }
 
-    private Node delete(Node x, String key, int d) {
+    private TrieNode delete(TrieNode x, String key, int d) {
         if (x == null) return null;
         if (d == key.length()) {
             x.isString = false;
@@ -76,7 +76,7 @@ public class TrieSET {
         return keys;
     }
 
-    private void collect(Node x, String prefix, List<String> results) {
+    private void collect(TrieNode x, String prefix, List<String> results) {
         if (x == null) return;
         if (x.isString)
             results.add(prefix);
@@ -87,7 +87,7 @@ public class TrieSET {
 
     public Iterable<String> keysWithPrefix(String prefix) {
         List<String> results = new ArrayList<>();
-        Node x = get(root, prefix, 0);
+        TrieNode x = get(root, prefix, 0);
         collect(x, prefix, results);
         return results;
     }
@@ -103,7 +103,7 @@ public class TrieSET {
 
     // returns the length of the longest string key in the subtrie rooted at x that is a prefix of the query string,
     // assuming the first d character match and we have already found a prefix match of length length
-    private int longestPrefixOf(Node x, String query, int d, int length) {
+    private int longestPrefixOf(TrieNode x, String query, int d, int length) {
         if (x == null) return length;
         if (x.isString) length = d;
         if (d == query.length())

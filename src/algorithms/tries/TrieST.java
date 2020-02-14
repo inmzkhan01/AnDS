@@ -7,14 +7,14 @@ import java.util.List;
  * Trie implementation.
  */
 public class TrieST<Value> {
-    private static final int R = 26;    // alphabets
+    private static final int R = 256;    // alphabets
 
-    private Node root = new Node();     // root of trie
+    private TrieNode root = new TrieNode();     // root of trie
 
     // R-way trie node
-    private static class Node {
+    private static class TrieNode {
         Object val;
-        Node[] next = new Node[R];
+        TrieNode[] next = new TrieNode[R];
     }
 
     public boolean contains(String key) {
@@ -22,12 +22,12 @@ public class TrieST<Value> {
     }
 
     public Value get(String key) {
-        Node x = get(root, key, 0);
+        TrieNode x = get(root, key, 0);
         if (x == null) return null;
         return (Value) x.val;
     }
 
-    private Node get(Node x, String key, int d) {
+    private TrieNode get(TrieNode x, String key, int d) {
         if (x == null) return null;
 
         if (d == key.length()) return x;
@@ -40,9 +40,9 @@ public class TrieST<Value> {
         root = put(root, key, val, 0);
     }
 
-    private Node put(Node x, String key, Value val, int d) {
+    private TrieNode put(TrieNode x, String key, Value val, int d) {
         if (x == null)
-            x = new Node();
+            x = new TrieNode();
 
         if (d == key.length()) {
             x.val = val;
@@ -58,7 +58,7 @@ public class TrieST<Value> {
         root = delete(root, key, 0);
     }
 
-    private Node delete(Node x, String key, int d) {
+    private TrieNode delete(TrieNode x, String key, int d) {
         if (x == null) return null;
 
         if (d == key.length()) {
@@ -82,7 +82,7 @@ public class TrieST<Value> {
         return keys;
     }
 
-    private void collect(Node x, String prefix, List<String> keys) {
+    private void collect(TrieNode x, String prefix, List<String> keys) {
         if (x == null) return;
         if (x.val != null)
             keys.add(prefix);
@@ -93,7 +93,7 @@ public class TrieST<Value> {
 
     public Iterable<String> keysWithPrefix(String prefix) {
         List<String> keys = new ArrayList<>();
-        Node x = get(root, prefix, 0);
+        TrieNode x = get(root, prefix, 0);
         collect(x, "", keys);
         return keys;
     }
@@ -106,7 +106,7 @@ public class TrieST<Value> {
 
     // returns the length of the longest string key in the subtrie rooted at x that is a prefix of the query string,
     // assuming the first d character match and we have already found a prefix match of given length (-1 if no such match)
-    private int longestPrefixOf(Node x, String query, int d, int length) {
+    private int longestPrefixOf(TrieNode x, String query, int d, int length) {
         if (x == null) return length;
         if (x.val != null) length = d;
         if (d == query.length()) return length;

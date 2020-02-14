@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class TST<Value> {
 
-    private Node<Value> root;   // root of TST
+    private TrieNode<Value> root;   // root of TST
 
-    private static class Node<Value> {
+    private static class TrieNode<Value> {
         private char c;                        // character
-        private Node<Value> left, mid, right;  // left, middle, and right subtries
+        private TrieNode<Value> left, mid, right;  // left, middle, and right subtries
         private Value val;                     // value associated with string
     }
 
@@ -22,13 +22,13 @@ public class TST<Value> {
     }
 
     public Value get(String key) {
-        Node<Value> x = get(root, key, 0);
+        TrieNode<Value> x = get(root, key, 0);
         if (x == null) return null;
         return x.val;
     }
 
     // return subtrie corresponding to given key
-    private Node<Value> get(Node<Value> x, String key, int d) {
+    private TrieNode<Value> get(TrieNode<Value> x, String key, int d) {
         if (x == null) return null;
 
         char c = key.charAt(d);
@@ -42,10 +42,10 @@ public class TST<Value> {
         root = put(root, key, val, 0);
     }
 
-    private Node<Value> put(Node<Value> x, String key, Value val, int d) {
+    private TrieNode<Value> put(TrieNode<Value> x, String key, Value val, int d) {
         char c = key.charAt(d);
         if (x == null) {
-            x = new Node<>();
+            x = new TrieNode<>();
             x.c = c;
         }
         if (c < x.c)                        x.left = put(x.left, key, val, d);
@@ -62,7 +62,7 @@ public class TST<Value> {
     }
 
     // all keys in subtrie rooted at x with given prefix
-    private void collect(Node<Value> x, StringBuilder prefix, List<String> list) {
+    private void collect(TrieNode<Value> x, StringBuilder prefix, List<String> list) {
         if (x == null) return;
         collect(x.left, prefix, list);
         if (x.val != null) list.add(prefix.toString() + x.c);
@@ -73,7 +73,7 @@ public class TST<Value> {
 
     public Iterable<String> keysWithPrefix(String prefix) {
         List<String> list = new ArrayList<>();
-        Node<Value> x = get(root, prefix, 0);
+        TrieNode<Value> x = get(root, prefix, 0);
         if (x == null) return list;
         if (x.val != null) list.add(prefix);
         collect(x.mid, new StringBuilder(prefix), list);
@@ -85,7 +85,7 @@ public class TST<Value> {
     public String longestPrefixOf(String query) {
         if (query.length() == 0) return null;
         int length = 0;
-        Node<Value> x = root;
+        TrieNode<Value> x = root;
         int i = 0;
         while (x != null && i < query.length()) {
             char c = query.charAt(i);

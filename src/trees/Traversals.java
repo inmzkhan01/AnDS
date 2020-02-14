@@ -371,4 +371,9 @@ public class Traversals {
         dfs(curr.right, res, level + 1);
     }
 
+    public static void main(String[] args) {
+        char ch = 'z';
+        System.out.println(ch - 'a');
+    }
+
 }
