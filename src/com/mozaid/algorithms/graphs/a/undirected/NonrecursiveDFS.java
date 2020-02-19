@@ -11,13 +11,14 @@ public class NonrecursiveDFS {
         marked = new boolean[G.V()];
 
         Stack<Integer> vertices = new ResizingArrayStack<>();
+        marked[s] = true;
         vertices.push(s);
 
         while (!vertices.isEmpty()) {
             int v = vertices.pop();
-            marked[v] = true;
             for (int w : G.adj(v)) {
                 if (!marked[w]) {
+                    marked[w] = true;
                     vertices.push(w);
                 }
             }
