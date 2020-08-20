@@ -50,6 +50,6 @@ public class StacksQueue<Item> {
         System.out.println(queue.dequeue());
         System.out.println(queue.dequeue());
         System.out.println(queue.isEmpty());
-
     }
+
 }

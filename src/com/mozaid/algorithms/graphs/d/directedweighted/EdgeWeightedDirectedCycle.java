@@ -12,8 +12,11 @@ public class EdgeWeightedDirectedCycle {
         marked = new boolean[G.V()];
         onStack = new boolean[G.V()];
         edgeTo = new DirectedEdge[G.V()];
-        for (int v = 0; v < G.V(); v++)
-            if (!marked[v]) dfs(G, v);
+        for (int v = 0; v < G.V(); v++) {
+            if (!marked[v])
+                dfs(G, v);
+        }
+
 
     }
 
@@ -27,7 +30,7 @@ public class EdgeWeightedDirectedCycle {
             // short circuit if directed cycle found
             if (cycle != null) return;
 
-            // found new vertex, so recur
+                // found new vertex, so recur
             else if (!marked[w]) {
                 edgeTo[w] = e;
                 dfs(G, w);

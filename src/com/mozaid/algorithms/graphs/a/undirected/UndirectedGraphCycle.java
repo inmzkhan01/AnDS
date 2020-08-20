@@ -84,8 +84,8 @@ public class UndirectedGraphCycle {
         System.out.println("Has cycle bfs: " + hasCycleBfs(Graph.eulerGraph()));
         System.out.println("Has cycle uf: " + hasCycleUF(Graph.eulerGraph()));
 
-        System.out.println("Has cycle dfs: " + hasCycleDfs(Graph.uncyclicGraph()));
-        System.out.println("Has cycle bfs: " + hasCycleBfs(Graph.uncyclicGraph()));
-        System.out.println("Has cycle uf: " + hasCycleUF(Graph.uncyclicGraph()));
+        System.out.println("Has cycle dfs: " + hasCycleDfs(Graph.acyclic()));
+        System.out.println("Has cycle bfs: " + hasCycleBfs(Graph.acyclic()));
+        System.out.println("Has cycle uf: " + hasCycleUF(Graph.acyclic()));
     }
 }

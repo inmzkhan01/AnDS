@@ -1,4 +1,4 @@
-package concurrency;
+package com.mozaid.java.concurrency.liveness;
 
 public class Livelock {
 

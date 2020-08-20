@@ -1,4 +1,4 @@
-package problems;
+package com.mozaid.problems.arrays;
 
 import java.util.Scanner;
 

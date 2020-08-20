@@ -70,7 +70,7 @@ public class Graph {
         return count / 2; // Each edge counted twice.
     }
 
-    public static Graph uncyclicGraph() {
+    public static Graph acyclic() {
         Graph graph = new Graph(7);
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);

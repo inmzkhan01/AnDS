@@ -37,6 +37,10 @@ public class ResizingArrayStack<T> implements Stack<T> {
         return t;
     }
 
+    public T peek() {
+        return a[n - 1];
+    }
+
     private void resize(int size) {
         T[] ts = (T[]) new Object[size];
         for (int i = 0; i < n; i++) {
@@ -56,7 +60,7 @@ public class ResizingArrayStack<T> implements Stack<T> {
 
         @Override
         public boolean hasNext() {
-            return i > 0;
+            return i > 0 && a[i] != null;
         }
 
         @Override

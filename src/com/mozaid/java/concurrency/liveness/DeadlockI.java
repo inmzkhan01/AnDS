@@ -1,10 +1,10 @@
-package concurrency;
+package com.mozaid.java.concurrency.liveness;
 
 /**
- * When Deadlock runs, it's extremely likely that both threads will block when they attempt to invoke bowBack.
+ * When DeadlockI runs, it's extremely likely that both threads will block when they attempt to invoke bowBack.
  * Neither block will ever end, because each thread is waiting for the other to exit bow.
  */
-public class Deadlock {
+public class DeadlockI {
 
     static class Friend {
         private final String name;

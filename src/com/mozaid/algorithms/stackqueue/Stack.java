@@ -6,6 +6,8 @@ public interface Stack<T> extends Iterable<T> {
 
     T pop();
 
+    T peek();
+
     int size();
 
     boolean isEmpty();

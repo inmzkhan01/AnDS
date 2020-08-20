@@ -1,30 +1,26 @@
-package com.mozaid.algorithms.graphs.b.directed;
+package com.mozaid.algorithms.graphs.a.undirected;
 
 
 import com.mozaid.algorithms.stackqueue.ResizingArrayStack;
 
-/**
- * Topological Sort. Applicable only to DAG (Directed Acyclic Graph)
- * Reverse DFS postorder.
- */
 public class DepthFirstOrder {
 
     private boolean[] marked;
     private ResizingArrayStack<Integer> reversePost;
 
-    public DepthFirstOrder(Digraph G) {
+    public DepthFirstOrder(Graph G) {
         marked = new boolean[G.V()];
         reversePost = new ResizingArrayStack<>();
-        for(int v = 0; v<G.V(); v++) {
-            if(!marked[v])
+        for (int v = 0; v < G.V(); v++) {
+            if (!marked[v])
                 dfs(G, v);
         }
     }
 
-    private void dfs(Digraph G, int v) {
+    private void dfs(Graph G, int v) {
         marked[v] = true;
-        for(int w : G.adj(v)) {
-            if(!marked[w])
+        for (int w : G.adj(v)) {
+            if (!marked[w])
                 dfs(G, w);
         }
         reversePost.push(v);
@@ -32,6 +28,11 @@ public class DepthFirstOrder {
 
     public Iterable<Integer> reversePostOrder() {
         return reversePost;
+    }
+
+    public static void main(String[] args) {
+        DepthFirstOrder order = new DepthFirstOrder(Graph.acyclic());
+        System.out.println(order.reversePostOrder());
     }
 
 }
