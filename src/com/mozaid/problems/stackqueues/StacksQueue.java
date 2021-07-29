@@ -1,7 +1,7 @@
 package com.mozaid.problems.stackqueues;
 
-import com.mozaid.algorithms.stackqueue.ResizingArrayStack;
-import com.mozaid.algorithms.stackqueue.Stack;
+import com.mozaid.dsa.stackqueue.ResizingArrayStack;
+import com.mozaid.dsa.stackqueue.Stack;
 
 public class StacksQueue<Item> {
 

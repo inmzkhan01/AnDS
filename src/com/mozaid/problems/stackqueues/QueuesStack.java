@@ -1,6 +1,6 @@
 package com.mozaid.problems.stackqueues;
 
-import com.mozaid.algorithms.stackqueue.ResizingArrayQueue;
+import com.mozaid.dsa.stackqueue.ResizingArrayQueue;
 
 public class QueuesStack<Item> {
 

@@ -1,6 +1,6 @@
 package com.mozaid.problems.graphs;
 
-import com.mozaid.algorithms.graphs.b.directed.Digraph;
+import com.mozaid.dsa.graphs.b.directed.Digraph;
 
 import java.util.Arrays;
 

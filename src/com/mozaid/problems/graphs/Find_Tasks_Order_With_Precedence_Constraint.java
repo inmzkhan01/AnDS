@@ -1,7 +1,7 @@
 package com.mozaid.problems.graphs;
 
-import com.mozaid.algorithms.graphs.b.directed.Digraph;
-import com.mozaid.algorithms.stackqueue.ResizingArrayStack;
+import com.mozaid.dsa.graphs.b.directed.Digraph;
+import com.mozaid.dsa.stackqueue.ResizingArrayStack;
 
 import java.util.List;
 

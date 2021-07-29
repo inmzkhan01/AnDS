@@ -1,6 +1,6 @@
 package com.mozaid.problems.graphs;
 
-import com.mozaid.algorithms.graphs.a.undirected.Graph;
+import com.mozaid.dsa.graphs.a.undirected.Graph;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
 package com.mozaid.problems.regex;
 
-import com.mozaid.algorithms.stackqueue.ResizingArrayQueue;
+import com.mozaid.dsa.stackqueue.ResizingArrayQueue;
 
 import java.net.URL;
 import java.net.URLConnection;
